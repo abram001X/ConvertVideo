@@ -3,51 +3,57 @@ body{
     place-content: center;
     background-color: #111;
     color: #fff;
-    font-size: 20px;
+    padding: 50px;
+    font-size: 22px;
 }
 h1{
     text-align: center;
 }
-.form{
+
+form{
     display: flex;
     flex-direction: column;
-    width: 700px;
-    height: 600px;
-    border: 3px solid #5080dd;
-    text-align: center;
+    width: 100%;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    margin: 0;
+    height: 600px;
+    border: 3px solid #5080ff;
+    border-radius: 10px;
 }
-
 input{
-    width: 250px;
-    height: 25px;
-    padding: 3px;
+    width: 300px;
+    padding: 5px;
     border: none;
     border-bottom: 2px solid #5080ff;
     outline: none;
     background-color: #333;
     color: #fff;
     border-radius: 5px;
+    margin: 5px;
+    font-size: 18px !important;
 }
-
+section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 60px 0px; 
+    height: 150px;
+    padding: 10px;
+}
 button{
     width: 150px;
-    height: 25px;
-    margin: 10px;
     background-color: #333;
     border: none;
     border-bottom: 2px solid #5080ff;
     color: #fff;
     border-radius: 5px;
+    padding: 5px;
 }
 button:hover{
     cursor: pointer;
 }
 button:focus{
     background-color: #444;
-}
-.v_mp3{
-    margin-top: 70px;
 }
