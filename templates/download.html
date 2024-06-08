@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{%block body%} 
+<h1>Convertidor de Videos </h1>
+<form  method="post" >
+    <section class="contenedor_mp4">
+        <label for="video">Convertir url a vídeo</label>
+    <input  name="video"  id="video" type="text" >
+    <button class="v_mp4-boton">Descargar</button>
+    <img src="" alt="">
+    {%if dato%}
+    <p>{{dato.title}}</p>
+    {%endif%}
+    </section>
+    <section class="contenedor_mp3" id="contenedor">
+        <label for="audio">Convertir url a audio</label>
+        <input type="text" name="audio" id="audio">
+        <button>Descargar</button>
+    </section>  
+</form>
+{%endblock%}
