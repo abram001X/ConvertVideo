@@ -1,0 +1,868 @@
+/* prompt : es un dato string (window no tiene que ser llamando ajuro)____ preventDefault(): Previene el comportamiento por defecto
+_________________Introducción a windows_________________. Hereda las propiedades de eventTarget
+open(): Abre una ventana emergente
+Ejemplo: 
+let youtube = "https://www.youtube.com";
+let ventana = window.open(youtube);
+---------------
+close(): Cierra la ventana emergente ---> (Tiene que ser la única ventana(link) abierta para que cierre)
+let youtube = "https://www.youtube.com";
+let ventana = window.open(youtube);
+
+ventana.close()
+----------------
+closed(): Te muestra si está cerrada la ventana(False o True)
+Ejemplo: 
+let youtube = "https://www.youtube.com";
+let ventana = window.open(youtube);
+
+ventana.closed--> (se puede colocar en la consola recomendado)
+-----------------
+stop(): detien el cargado de página(actualizar la página)
+Ejemplo:
+window.stop()
+-----------------
+print(): Se usa para imprimir literalmente
+Ejemplo:
+print();
+----------------
+confirm(): Abre un cuadro de aceptar o cancelar que interactúa con el usuario
+Ejemplo:
+let respuesta = confirm("Eres pato?")
+
+console.log(respuesta)---->nos devuelve False o True
+------------------
+screen() : 
+
+------------------
+pantallaLeft: nos devueelve la distanca de la parte izquierda de la ventana con el monitor
+Ejemplo: 
+let pantallaLeft = window.screenLeft ---->solo de lectura
+console.log(pantallaLeft)
+-----------------
+pantallaLeft: nos devueelve la distanca de la parte de arriba de la ventana con el monitor
+Ejemplo: 
+let pantallaTop = window.screenTop
+console.log(pantallaTop)
+--------------------
+scroll x and y: Nos devuelve la cantidad que nos desplazamos en la pagina
+Ejemplo: 
+scrollX = window.scrollX;
+scrollY = window.scrollY;
+ alert("x: "+ scrollX +" Y: " + scrollY )
+-----------------------
+scroll: Nos desplaza la cantidad que le pasamos...(scrollTo Es casi lo mismo)
+Ejemplo: 
+window.scroll(0,100)--->Usar en consola
+----------------------
+resizeBy() y resizeTo(): cambia el tamaño de la ventana
+ventana.resizeBy----> se hace en un server
+---------------------
+moveTo(): mueve la ventana
+--------------------
+window.location.href: Nos muestra en donde está localizado la pagina
+Ejemplo:
+const href = window.location.href
+document.write(href); ---> se  coloca en consola solo
+--------------------
+window.location.hostname: Nos muestra el dominio de la página
+Ejemplo: 
+window.location.hostname
+--------------------
+window.location.pathname:Nos muestra donde está la página desde el origen(ubicación específica)
+Ejemplo: 
+window.location.pathname
+--------------------
+window.location.protocol: Nos muestra el protocol web utilizado(http o https)
+Ejemplo: 
+window.location.protocol
+--------------------
+window.location.assign(): Carga un nuevo documento puesto por nosotros
+Ejemplo:
+window.location.assign("https://youtube.com")
+--------------------
+________Eventos______.
+Colocandole una funcionalidad al botón(Event handlers)
+Ejemplo:
+const boton = document.querySelector(".boton");
+
+boton.onclick = () => {
+    alert("hola")
+}
+-----------------------
+addEventListener():Colocandole una funcionalidad al botón
+Ejemplo: 
+const boton = document.querySelector(".boton");
+
+boton.addEventListener("click",saludar)--->(acción,función(variable))
+
+function saludar(){ ----->(no se puede con funciones flechas ni tampoco parámetros)
+    alert("hola")
+}
+
+Ejemplo#2: 
+const boton = document.querySelector(".boton");
+
+boton.addEventListener("click",()=>{ -----> colocando la función flecha en addlistener
+    alert("hola")
+});
+-----------------------
+removeEventListener(): removiendo un evento(elemento del evento)
+Ejemplo:
+const boton = document.querySelector(".boton");
+
+boton.addEventListener("click",saludar  );
+
+function saludar(){
+    alert("hola"
+    button.removeEventListener("click",saludar))
+}
+------------------------
+mostrando el objeto evento:
+Ejemplo:
+const boton = document.querySelector(".boton");
+
+boton.addEventListener("click",(e)=>{
+    console.log(e.target)
+});
+---------------------
+Flujo de eventos: Primero se ejecuta el elemento más especifico(el hijo) y después el menos especifico (padre) .
+Ejemplo:
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("click",(e)=>{
+    alert("contenedor")
+});
+
+boton.addEventListener("click",(e)=>{
+    alert("boton")
+});
+-----> Para ordenar el flujo de otra manera se coloca True (se ejecuta primero true y después el más especifico a menos que otro elemento tenga true
+eventobublling:
+Ejemplo#2: 
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("click",(e)=>{
+    alert("contenedor")
+},True);--->Último parámetro
+
+boton.addEventListener("click",(e)=>{
+    alert("boton")
+});
+-----------------------
+stopPropagation(): se usa para ejecutar solo un elemento--> si un elemento tiene true se ejecuta
+Ejemplo:
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("click",(e)=>{
+    alert("contenedor")
+});
+
+boton.addEventListener("click",(e)=>{
+    alert("boton")
+    e.stopPropagation()
+});
+________Eventos del mouse_______.
+"dblclick": Se ejecuta  un evento al darle doble click
+Ejemplo:
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("dblclick",(e)=>{
+    alert("contenedor")
+});
+-------------------
+"mouseover": ejecuta un evento cuando se coloca el mouse por encima de  un elemento o por sus hijos(raro su funcionamiento)
+Ejemplo: 
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("mouseover",(e)=>{
+    alert("contenedor")
+});
+-----------------
+"mouseout": Se ejecuta el evento cuando sales de un elemento
+Ejemplo: 
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("mouseout",(e)=>{
+    alert("contenedor")
+});
+-----------------
+"contextmenu": Se ejecuta el evento cuando da click derecho
+Ejemplo: 
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("contextmenu",(e)=>{
+    alert("contenedor")
+});
+----------------
+"mousemove": Ocurre mientras el mouse está sobre un elemento
+Ejemplo:
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("mousemove",(e)=>{
+    alert("contenedor")
+});
+----------------
+"mouseleave": Ocurre cuando sale de un elemento 
+Ejemplo: 
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("mouseleave",(e)=>{
+    alert("contenedor")
+});
+---------------
+"mousedown": Ocurre cuando clickeas un elemento (no importa que lo mantenas como click iual se ejecuta)
+Ejemplo: 
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("mousedown",(e)=>{
+    alert("contenedor")
+});
+---------------
+"mouseup": Ocurre cuando sueltas el botón del mouse sobre ele elemento (si lo presiones afuera y lo sueltas dentro se ejecuta)
+Ejemplo: 
+const boton = document.querySelector(".boton");
+
+const cont = document.querySelector(".cont")
+cont.addEventListener("mouseup",(e)=>{
+    alert("contenedor")
+});
+________Evento del teclado_______.
+"keydown": Ocurre cuando una tecla se presiona en un elemento 
+Ejemplo:
+input.addEventListener("keydown",(e)=>{  --->El (e) Es el evento es como una variable
+    console.log("Una tecla fue presionada")
+})
+--------------------
+"keyup": Ocurre cuando una tecla se suelta en un elemento 
+Ejemplo:
+input.addEventListener("keyup",(e)=>{
+    console.log("Una tecla fué soltada")
+})
+--------------------
+"keypress": Ocurre cuando  se presiona y se suelta en un elemento (Las dos  anteriores)
+Ejemplo: 
+input.addEventListener("keypress",(e)=>{
+    console.log("Un usuario presionó una tecla")
+})
+--------------------
+"Error": Se ejecuta un evento cuando ocurre un error
+Ejemplo: 
+const img = document.querySelector(".img");
+
+img.addEventListener("error",(e)=>{
+    console.log("Ha ocurrido un error")
+})
+--------------------
+"load": Ocurre cuando se ha cargado un objeto
+Ejemplo: 
+window.addEventListener("load",(e)=>{--->El  window  No ajuro tiene que ser llamado
+    console.log("Ha cargado la página")
+})
+--------------------
+"beforeunload": Ocurre antes de dejar el sitio
+Ejemplo:
+addEventListener("beforeunload",()=>{
+    console.log("te vas a ir a youtube")
+    alert("te vas pa youtube")
+})
+-------------------
+"unload": Ocurre cuando te vas del sitio
+Ejemplo: 
+addEventListener("unload",()=>{
+    console.log("te vas a ir a youtube")
+    alert("te vas pa youtube")
+})
+--------------------
+"resize": Ocurre cuando cambia la resolución
+Ejemplo: 
+addEventListener("resize",()=>{
+    console.log("la resolución cambió")
+    
+})
+--------------------
+"scroll": Ocurre cuando se scrollea
+Ejemplo: 
+addEventListener("scroll",()=>{
+    console.log("Estás scrolleando")
+    
+})
+-------------------
+-------"select"------.(solo input y textarea)
+"select": Ocurre cuando seleccionamos algo
+Ejemplo: 
+const input = document.querySelector(".prueba");
+
+input.addEventListener("select",(e)=>{    ---->target: nos muestra el  objeto (elemento/etiqueta/nodo)
+    console.log(e)--->Nos devuelve información del objeto 
+})
+------"""propiedades de un objeto seleccionado"""------
+"selectionStart"(es un array): Nos muestra el primer índice cuando se selecciona.
+Ejemplo:
+const input = document.querySelector(".prueba");
+
+input.addEventListener("select",(e)=>{    ---->target: nos muestra el  objeto (elemento/etiqueta/nodo)
+    console.log(e.target.selectionStart) 
+})
+------
+"selectionEnd": Nos muestra el último índice cuando se selecciona.
+Ejemplo: 
+const input = document.querySelector(".prueba");
+
+input.addEventListener("select",(e)=>{    ---->target: nos muestra el  objeto (elemento/etiqueta/nodo)
+    console.log(e.target.selectionEnd) 
+})
+-------------------Mostrando las letras seleccionnadas: 
+const input = document.querySelector(".prueba");
+const cont = document.querySelector(".cont")
+input.addEventListener("select",(e)=>{
+    let start = e.target.selectionStart;
+    let end = e.target.selectionEnd;
+    let texto = input.value;
+    cont.textContent = texto.substring(start,end);
+})
+-------------------Mostrando las teclas oprimidas: 
+Ejemplo: 
+const input = document.querySelector(".prueba");
+const cont = document.querySelector(".cont")
+input.addEventListener("keyup",(e)=>{
+    let tecla = e.key;
+    cont.innerHTML = (`La tecla <b>${tecla}</b> fue seleccionada`)
+})
+------------------------
+_______Temporizadores_______.
+setTimeout(): Ocurre el evento después de pasado el tiempo  que  se coloca
+Ejemplo:
+setTimeout(()=>{ ---->por parámetros
+    document.write("papapa")
+},2000)---> El tiempo se define por milisegundos 
+------------
+const temporizador = clearTimeout(): Elimina el temporizador
+setTimeout(()=>{
+    document.write("papapa")
+},2000)
+
+clearTimeout(temporizador)
+--------------
+setInterval(): Ocurre el evento cada vez que termina el tiempo(nunca termina de ejecutarse)
+Ejemplo:
+setInterval(()=>{
+    document.write("papapa")
+},1000)
+
+clearinterval(): Termina el evento intervalo
+--------------Ejecutando un evento(intervalo) varias veces hasta un fin:
+const intervalo = setInterval(() => {
+   document.write("hola") 
+},2000);
+
+
+setTimeout(()=>{
+    clearInterval(intervalo)
+},10000)
+----------------
+________control de flujos y manejo de errores_______.
+sentencias de bloque:
+{}(bloque): ámbito de la variable
+Ejemplo:
+let nombre = "jorge";
+
+{
+    let nombre = "pedro";
+    alert(nombre);
+    {
+        let nombre = "pepe";
+        alert(nombre);
+    }
+}------------------
+Sentencias de controlde flujo: 
+(If, elseif,else)
+------------------
+Sentencias de manejo de excepciones:
+
+-------------------------
+switch: Funciona muy similar a los condicionales (if...)
+Ejemplo: 
+
+let expr = "banana"
+switch(expr){
+    case "banana" : console.log("esto es yellow");
+    alert("banana")
+    break;
+    case "manzana" : console.log("adán y eva");
+    alert("manzana")
+    break;
+    case "pera" : console.log("forma rara");
+    alert("pera")    
+    break;
+    default: ----> funciona como else
+        alert("no es nada")
+}
+----------------
+typeof: nos devuelve el tipo de dato
+Ejemplo:
+console.log(typeof error);
+----------------
+(try,catch,finally):try---> Si dentro de try  hay un error , catch se ejecuta, y finally siempre se ejecuta 
+Ejemplo:  
+try{
+    asdasdj
+}
+catch{
+    console.log("Hay un error bro"); hay catch condicionales e incondicionales
+}
+finally{
+    console.log("siempre se ejecuta finally")
+}
+----------------
+throw: devuelve errores
+Ejemplo: 
+try{
+    throw ["hola","chao"]
+}
+catch(e){---> el parámetro e es """throw""""
+    console.log(e[1]);
+}
+finally{
+}
+------------------
+______Métodos transformadores de cadenas obsoletos_______.(buscar en google si hace falta)
+blod()
+fixed() 
+fontcolor()
+fontsize()
+anchor()
+small()
+sub()
+sup()
+------------------
+callback: Es  una función dentro de otra, osea que una función se usa como parámetro
+Ejemplo: 
+const callback = (fn)=>{
+    fn()
+};
+
+const mensaje = ()=>{
+    console.log("hola");
+};
+
+callback(mensaje);
+----------------------
+promise: Se usa para disminuir el uso excesivo de callbacks
+Ejemplo: 
+let nombre = "pepe"
+
+const promesa = new Promise((resolve,reject)=>{ ---> resolve y reject son funciones
+    if(nombre  !== "pepe") reject("el nombre no es pepe");
+    else resolve(nombre);
+
+})
+
+promesa.then((resultado)=>{ ----> then: es un metodo que está vinculado a resolve(osea que nos devuelve resolve)
+    console,log(resultado) 
+}).catch((e)=>{ ----> catch está vinculado a reject (Nos devuelve reject)
+    console.log(e)
+})
+Ejemplo entero: 
+class persona{
+    constructor(nombre,ig){
+        this.nombre = nombre;
+        this.ig = ig;
+    }
+};
+
+const data = [
+    ["abraham","@abram"],
+    ["adrean","@adrean29"],
+    ["carlos","@00carlos"],
+    ["arnold","@asdlarnold"]
+];
+
+const personas = [];
+for(let j = 0; j < data.length ; j++){
+    personas[j] = new persona(data[j][0],data[j][1]);
+};
+
+const obtenerPersona = (jd)=>{
+   return new Promise((resolve,reject)=>{
+    if(personas[jd] == undefined) reject("No se ha encontrado la persona");
+    else {resolve(personas[jd])};
+   })
+    
+}
+
+const obtenerIg = (jd)=>{
+    return new Promise((resolve,reject)=>{
+        if(personas[jd].ig == undefined) reject("No se ha encontrado el instagram");
+        else {resolve(personas[jd].ig)}; 
+    })
+}
+
+let jd = 2;
+
+obtenerPersona(jd).then((persona)=>{}
+    console.log(persona.nombre);    }
+    return obtenerIg(jd);           } retorna una promesa por eso se coloca el .then así
+}).then((ig)=>{                     }
+    console.log(ig)                 }     
+}).catch((e)=>{
+    console.log(e);
+})
+--------------
+las promesas son asíncronas Trabajan a tiempo real(osea que esperan la información y cuando la reciben se ejecuta
+Ejemplo(de promesa)
+const objeto = {
+    prop1: "valor1",
+    prop2: "valor2",
+    prop3: "valor3"
+}
+
+const obtenerInformacion = ()=>{
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve(objeto)},1000)
+    })
+}
+
+obtenerInformacion().then(resultado => console.log(resultado));--->colocar parámetro a  then(función que refiere a resolve....Resultado = obtenerInformacion())
+----------------------
+maneras de aplicar async a  las funciones:
+const mostrarResultado = async ()=>{
+}
+async function mostrarResultado(){
+}
+Ejemplo de async y await:  
+const objeto = {
+    prop1: "valor1",
+    prop2: "valor2",
+    prop3: "valor3"
+}
+
+const obtenerInformacion = ()=>{
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve(objeto)},1000)
+    })
+}
+
+const obtenerResultado = async ()=>{
+    resultado = await obtenerInformacion();
+    console.log(resultado);
+}
+
+console.log(obtenerResultado())
+
+Ejemplo#2:
+const objeto = {
+    prop1: "valor1",
+    prop2: "valor2",
+    prop3: "valor3"
+}
+
+
+const obtenerInformacion = (text)=>{
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve(text)},Math.random()*200)
+    })
+}
+
+const mostrarData = async()=>{
+    data1 = await obtenerInformacion("1: pato"); await ---> accede al valor que retorna la promesa en orden...(Obtiene la información y hasta que no la consiga no se ejecutan las demás
+    data2 = await obtenerInformacion("2: toto");
+    data3 = await obtenerInformacion("3: allo");
+    console.log(data1);
+    console.log(data2);
+    console.log(data3);
+}
+
+mostrarData()
+------------------sistema como referencia de callbacks,promise y async & await.
+Ejemplo: 
+
+const materiasHTML = document.querySelector(".materias");
+
+const materias = [
+    {
+        nombre: "fisica 4",
+        nota: "8"
+    },
+    {
+        nombre: "programa 4",
+        nota: "7"
+    },
+    {
+        nombre: "cálculo 3",
+        nota: "8"
+    },
+    {
+        nombre: "base de dato 2",
+        nota: "6"
+    }
+]
+const obtenerMateria =  (jd)=>{
+    return new Promise((resolve,reject)=>{
+        let materia = materias[jd];
+        if(materia == undefined) reject("materia inválida");
+        else setTimeout(()=>{resolve(materia)},Math.random()*400);
+    })
+}
+
+const devolverMateria = async()=>{
+    let element = []
+    for (let j = 0; j < materias.length; j++) {
+            element[j] = await obtenerMateria(j);
+            console.log(element[j])
+             materiasHTML.innerHTML += `
+            <div class="materia">
+          <div class="nombre">${element[j].nombre}</div>
+          <div class="nota">${element[j].nota}</div>
+        </div>`;
+    }
+}
+
+devolverMateria() 
+------------------
+________Peticiones HTTP______.
+_____JSON(JavaScript Object Notation)_____.
+const objeto = { ---> ES (JSON) porque las variables están cerradas con ("")
+    "a" : "pepe",
+    "b" : "pele"
+}
+-----------
+String(JSON): const objeto = `{a : "pepe",b : "pele"}`;--->String(JSON) deserializado
+const objeto = {a : "pepe",b : "pele"};----> String(JSON)serializado... (no tiene ``)
+----------------------
+JSON.stringify(): Se usa para serializar un string.
+Ejemplo:
+const deserializado = {a : "pepe",b : "pele"};
+const serializado = JSON.stringify(deserializado);
+console.log(typeof serializado)
+
+--------------------
+JSON.parse(): Deserializar un string(objeto)
+Ejemplo: 
+const serializado = `{"a" : "pepe","b" : "pele"}`;
+const deserializado = JSON.parse(serializado);
+console.log(deserializado.a);
+---------------
+JSON Polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/JSON/parse
+----------------
+___________AJAX( Asynchronous JavaScript And XML)(java asyncrono)_________.
+XMLHttpRequest(): Se usa para enviar peticiones
+Ejemplo: 
+const peticion = new XMLHttpRequest();
+
+console.log(typeof peticion)
+---------------
+"GET": Es un parámetro para abrir una petición
+Ejemplo: 
+const peticion = new XMLHttpRequest();
+
+----abriendo una petición----
+const peticion = new XMLHttpRequest();
+peticion.open("GET","información.txt") ---->Se usa dos parámetros("GET" o "POST", "URL")
+peticion.send(); -----> Enviando petición
+console.log(peticion)
+---------------------
+"readystatechange": Es un evento que muestra los estados de una petición(creo)
+Ejemplo:
+const peticion = new XMLHttpRequest();
+
+peticion.addEventListener("readystatechange",()=>{
+    console.log(peticion.readyState)
+})
+peticion.open("GET","información.txt");
+peticion.send();
+
+-----Estados:----
+1: La solicitud se creó correctamente.
+2: La solicitud se envió correctamente.
+3: Se está procesando la petición.
+4: Ya está todo listo y ya se puede utilizar el resultado.
+---------------------
+status: Vemos el estado de la petición 
+Ejemplo:
+const peticion = new XMLHttpRequest();
+
+peticion.addEventListener("readystatechange",()=>{
+    if(peticion.readyState == 4){                                           (creo xd):
+        console.log(peticion.status)---> 404: No se encuentra el archivo, 200---> La petición está correcta
+    }
+})
+Ejemplo#2: (Mejor manera de aplicar)---
+let peticion; 
+
+if (window.XMLHttpRequest){
+    peticion = new XMLHttpRequest();
+} 
+else {
+    peticion = new ActiveXObject("MIcrosoft.XMLHTTP");
+};
+
+
+peticion.addEventListener("load",()=>{
+        let respuesta;
+        if(peticion.status == 200){
+            respuesta = peticion.response;
+        }
+        else {
+            respuesta = "error";
+        }
+        console.log(JSON.parse(respuesta).nombre); ---> deserealizar
+})
+peticion.open("GET","información.txt");
+peticion.send();
+----------------------
+Para internet explorer : 
+let peticion; 
+if (window.XMLHttpRequest) peticion = new XMLHttpRequest;
+else peticion = new ActiveXObject("MIcrosoft.XMLHTTP");
+-------------------
+_______Peticiones Post______.
+Ejemplo:(Verificar cuadro comparativo)
+let peticion; 
+
+if (window.XMLHttpRequest){
+    peticion = new XMLHttpRequest();
+} 
+else {
+    peticion = new ActiveXObject("MIcrosoft.XMLHTTP");
+};  
+
+peticion.addEventListener("load",()=>{
+        let respuesta;
+        if(peticion.status == 201 || peticion.status == 200){
+            respuesta = peticion.response;
+        }
+        else {
+            respuesta = "error";
+        }
+        console.log(JSON.parse(respuesta));
+})
+
+____________________Lo que importa_______________________
+peticion.open("POST","https://reqres.in/api/users");
+peticion.setRequestHeader("Content-type","application/json;charset=UTF8")----> para enviar una petición(Encabezado(Tipo de encabezado), valor(URL)) 
+
+peticion.send(JSON.stringify({
+    "name": "morpheus",
+    "job": "leader"
+}));
+------------------
+fetch(): reemplazó AJAX porque es más facil de usar ....tiene el  método GET por defecto
+Ejemplo:--->Lo mismo que el anterior
+fetch("https://reqres.in/api/unknown/2")
+    .then(res=>res.text())--->text(): Desencapsula el valor de la promesa en un texto
+    .then(res=>console.log(res))----> Lo deuelve deserealizado(string)
+------------------
+json(): Devuelve  el valor en un JSON(OBJETO)
+Ejemplo: 
+fetch("https://reqres.in/api/unknown/2")
+    .then(res=>res.json())<------
+    .then(res=>console.log(res))
+---------------------
+Trabajar Post con fetch: 
+Ejemplo: 
+fetch("https://reqres.in/api/users",{
+        method: "POST",
+        body: JSON.stringify({
+            "nombre": "Lucas",
+            "apellido": "Dalto"
+        }),
+        headers:{"content-type": "application/json"}
+})
+    .then(res=>res.text())
+    .then(res=>console.log(res))
+Ejemplo#2: Otra manera de hacerlo 
+
+segundoParametro =     
+{   
+    method: "POST",
+    body: JSON.stringify({"nombre": "Lucas","apellido": "Dalto"}), --->Dependiendo del tipo información que enviemos se coloca una cabezera distinta(header) --->[content-type]
+    headers:{"content-type": "application/json"}
+}
+fetch("https://reqres.in/api/users",segundoParametro)
+    .then(res=>res.text())
+    .then(res=>console.log(res))
+------------------------
+imagen.src = "5075551.png": Guarda  una URL (Link)
+---------------------
+blob(): 
+Ejemplo:
+const imagen = document.querySelector(".imagen");
+
+fetch("5075551.png")
+    .then(res=>res.blob())
+    .then(img=>imagen.src = URL.createObjectURL(img))---->Crea  una URL en la  que almacena lo que le pasemos para poder mostrarlo
+------------------------
+_________Librería Axios (reemplaza fetch)______.
+axios: Por defecto viene con peticiones "GET" , El header lo coloca automaticamente
+Ejemplo: pedir un petición
+axios("información.txt")  
+.then(res=>res.json())
+.then(res=>console.log(res.data))---->.data nos muestra la data
+----------//
+Ejemplo#2: Post
+axios.post("https://reqres.in/api/users",{--->Enviando una petición(información)...Se coloca de segundo parámetro de axios.
+    "nombre": "Lucas","apellido": "Dalto"
+})
+    .then(res=>console.log(res.data))
+
+
+--------------------
+________Fetchy axios con await  y async______.
+
+Esto nos  devuelve undefined
+const getName = ()=>{
+    fetch("informackion.txt")
+    .then(res =>{
+        if (res.ok)Promise.resolve(res)
+        else Promise.reject(res);
+    })
+    .then(res=>console.log(res))---->porque no terminade llegar  hasta aquí
+    .catch(e=>console.log(e))
+}
+getName()
+Ejemplo#2: usando async y await
+const getName = async()=>{
+    let peticion = await fetch("información.txt");
+    let resultado = await peticion.json();
+    let HTMLCode = `Nombre : ${resultado.nombre}<br>
+                    Apellido: ${resultado.apellido}<br>
+                    edad:  ${resultado.edad}`;
+    document.querySelector(".cont").innerHTML = HTMLCode;
+}
+
+document.getElementById(`nombre`).addEventListener("click",()=>getName())
+
+Usando fetch: 
+const getName = async()=>{
+    let peticion = await fetch("información.txt");
+    let resultado = await peticion.json();
+    let HTMLCode = `Nombre : ${resultado.nombre}`;
+    document.querySelector(".cont").innerHTML = HTMLCode;
+}
+
+const getApellido = async()=>{
+    let peticion = await fetch("información.txt");
+    let resultado = await peticion.json();
+    let HTMLCode = `Apellido : ${resultado.apellido}`;
+    document.querySelector(".cont").innerHTML = HTMLCode;
+}
+const getEdad = async()=>{
+    let peticion = await fetch("información.txt");
+    let resultado = await peticion.json();
+    let HTMLCode = `<button id="edad">${resultado.edad}</button>`
+    document.querySelector(".cont").innerHTML = HTMLCode;
+}
+document.getElementById(`nombre`).addEventListener("click",()=>getName())
+document.getElementById("apellido").addEventListener("click",()=>getApellido())
+document.getElementById("edad").addEventListener("click",()=>getEdad())

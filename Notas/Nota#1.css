@@ -1,0 +1,880 @@
+/* NaN: no es un numero--- strings(cambia el valor a strings)  (a los objetos los colocamos con const y a las variables con let)         (HTML): form = "" : funciona como si el elemento estuviera dentro de form(etiqueta) sin  tener que estar adentro
+nota---> Buscar en google los codigos obsoletos, estándares,no recomendados etc..
+parseInt(convierte las variables a numeros.
+
+isNaN: no es un numero
+VARIABLES:
+-------------------
+tipos de variables:
+....................................
+var :declara  la variable
+let: declara la variable(si la variable no tiene valor da undifined)
+const: variable constante (no se puede cambiar el valor de la variable)
+
+------------------------
+null: valor  nulo o vacío
+
+prompt: sirve para que el usuario interactúe con la consola(funciona como input en python) 
+document.write(edad): escribe el proceso en la pantalla
+
+operadores de asignación:
+decremento(--): resta 1 a la  variable
+
+numero1 = 20;
+numero1 --;
+resultado = numero1
+alert(numero1)
+------------------
+incremento(++):suma 1 a la  variable
+
+numero1 = 20;
+numero1 ++;
+resultado = numero1
+alert(numero1)
+
+"": sirve para convertir las variables en strings
+frase= "" +  numero1 + numero2
+
+${}: funciona igual  que {} en python pero hay que usar este simbolo(``) en vez  de comillas
+---------------------------
+operadores de comparacion: 
+==: es igual a---- no diferencia strings con numeros
+===: es igual a---- si diferencia strings con numeros (estrictamente iguales)
+----------------------
+condicionales: 
+if 
+else if
+else
+----------------------
+bucles:
+num = prompt("ingresa un numero")
+
+for (let i = num; i > 0; i--){
+    document.write(i + "<br>")
+}
+
+num = prompt("ingresa un numero")
+
+for (let i = 0; i < num; i++){
+    if (i == 12){
+       continue;
+    }
+    document.write(i + "<br>")
+}
+
+let frutas = ["manzana","pera","cambur"];
+
+forRancio:--->nombre del bucle (es como una variable)
+for (fruta in frutas){
+    document.write(fruta + "<br>");---->devuelve la posición del valor (indice)
+}
+
+for(fruta  of frutas){
+    document.write(fruta + "<br>");---> devuelve los valores de  la lista
+}
+---------------------------
+funciones:
+function saludar(){
+    alert("hola")
+    return ("comko estas?")--> return guarda los valores (retorna el proceso)[la funcion finaliza cuando llega a return]
+}
+saludo  = saludar()
+document.write(saludo)
+(otra forma de crear funciones):
+const saludo = function saludar(){
+    alert("hola")
+    return ("comko estas?")-->
+}
+saludo  = saludar()
+document.write(saludo)
+-----------------
+funciones fle :(si es un parametro se puede quitar los parentesis... si la funcion es de una linea se puede colocar después de la flecha
+const saludo = (nombre)=> alert("hola" + nombre);
+-------------------
+clases:
+class  animal{
+    constructor(especie,edad,color){
+        this.especie = especie;
+        this.edad = edad;
+        this.color = color;
+        this.info = `un ${especie} tiene ${edad} años y es de color ${color}`
+    }
+}
+
+let perro = new animal("perro",10,"marron");
+let gato = new animal("gato",3,"white");
+let pato = new animal("pato",6,"yellow");
+
+document.write(perro.info + "<br>");
+document.write(gato.info +"<br>");
+document.write(pato.info + "<br>");
+------------------------
+metodos: las funciones flecha no se funcionan en las clases
+class  animal{
+    constructor(especie,edad,color){
+        this.especie = especie;
+        this.edad = edad;
+        this.color = color;
+        this.info = `un ${especie} tiene ${edad} años y es de color ${color}`
+    }
+    verInfo(){
+        document.write(this.info);
+}
+
+perro verInfo();
+gato verInfo();
+pato verInfo();
+-------------------------
+polimorfismo: los objetos se comportan diferente solo pq tiene propiedades  distintas
+class  animal{
+    constructor(especie,edad,color){
+        this.especie = especie;
+        this.edad = edad;
+        this.color = color;
+        this.info = `un ${especie} tiene ${edad} años y es de color ${color}`;
+    }
+    verInfo(){
+        document.write(this.info + "<br>");
+    }
+    ladrar(){
+        if (this.especie == "perro"){
+            document.write("WAW!"+ "<br>");
+        }else{
+            document.write("no puede ladrar" + "<br>");
+        }
+    }
+}
+
+const perro = new animal("perro",10,"marron");
+const gato = new animal("gato",3,"white");
+const pato = new animal("pato",6,"yellow");
+
+perro.ladrar()
+gato.ladrar()
+pato.ladrar()
+---------------------------
+herencia:Crear una class que va a utilizar todo lo que puede hacer la otra class y  aregarle cosas nuevas
+class  Animal{
+    constructor(especie,edad,color){
+        this.especie = especie;
+        this.edad = edad;
+        this.color = color;
+        this.info = `un ${especie} tiene ${edad} años y es de color ${color}`;
+    }
+    verInfo(){
+        document.write(this.info + "<br>");
+    }
+    
+}
+class Perro extends Animal{ extends hereda la class
+    constructor(especie,edad,color,raza){ atributos
+        super(especie,edad,color);de esta manera hereda los objectos
+        this.raza = raza; objetos
+    }
+    ladrar(){
+        if (this.especie == "perro"){
+            document.write("WAW!"+ "<br>");
+        }else{
+            document.write("no puede ladrar" + "<br>");
+        }
+    }
+} 
+
+let perro = new Perro("perro",10,"marron","doberman");
+let gato = new Perro("gato",3,"white");
+let pato = new Perro("pato",6,"yellow");
+
+perro.ladrar();
+gato.ladrar();
+pato.ladrar();
+------------------------------
+static
+
+------------------------------
+setters: se usa para modificar los objetos
+class Perro extends Animal{
+    constructor(especie,edad,color,raza){ atributos
+        super(especie,edad,color);de esta manera hereda los objectos
+        this.raza = raza; objetos
+    }
+    set modificarRaza(newName){  ---> set (setter)
+        this.raza = newName
+    }
+} 
+
+const perro = new Perro("perro",10,"marron","doberman");
+perro.modificarRaza = "papo"--->  de ésta manera cambiamos el atributo
+
+document.write(perro.raza)
+------------------------------
+getters: obtenemos el valor 
+class Perro extends Animal{
+    constructor(especie,edad,color,raza){ atributos
+        super(especie,edad,color);de esta manera hereda los objectos
+        this.raza = raza; objetos
+    }
+    set setRaza(newName){
+        this.raza = newName;
+    }
+    get getRaza(){ 
+        return this.raza;
+    }
+} 
+
+const perro = new Perro("perro",10,"marron","doberman");
+perro.setRaza = "papo"
+
+document.write(perro.getRaza)
+-----------------------------
+Metodos de cadenas: Estándar:
+concat(): Junta dos o más cadenas y retorna una nueva(añade otra cadena a la misma)
+let cadena =  "cadena de prueba"
+
+resultado = cadena.concat(" Hola")
+
+document.write(resultado)
+-------------
+startsWith(): si una cadena tiene los mismos carácteres(al comienzo), dentro de la otra cadena devuelve True , o si no  devuelve False
+endsWith(): Si una cadena tiene los mismos carácteres con los que termina,  dentro de la otra cadena  devuelve True , o si no  devuelve False
+---------------
+includes(): devuelve True si coincide un  carácter o una palabra,  dentro de la otra  cadena
+let cadena =  "cadena de prueba"
+
+resultado = cadena.includes("cade")
+
+document.write(resultado)
+-------------------------
+indexOf(): devuelve la posición del primer carácter que coloquemos, dentro de  la otra cadena(si no se encuentra nos devuelve -1)
+let cadena =  "cadena de prueba"
+
+resultado = cadena.indexOf("ade")
+
+document.write(resultado)
+-------------------------
+lastIndexOf(): devuelve la posición del último carácter que coloquemos, dentro de  la otra cadena(si no se encuentra nos devuelve -1)(la ultima de  todas las coincidencias nos muestra la posición
+et cadena =  "cadena de prueba"
+
+resultado = cadena.lastIndexOf("ade")
+
+document.write(resultado)
+----------------- Pre-Estándar
+padStart(): Rellena la cadena con  los carácteres  que le proporcionamos hasta que llegue a la cantidad establecida
+let cadena =  "prueba"
+
+resultado = cadena.padStart(10,"ade")
+document.write(resultado)
+------------------
+padEnd(): Rellena la cadena con  los carácteres  que le proporcionamos hasta que llegue a la cantidad(agrega los carácteres al final de la cadena)
+let cadena =  "prueba"
+
+resultado = cadena.padEnd(10,"ade")
+document.write(resultado)
+---------------------
+repeat(): Repite la cadena la cantidad de veces  que establecemos 
+
+let cadena =  "prueba "
+
+resultado = cadena.repeat(10)
+
+document.write(resultado)
+----------------------- Otras Más
+split(): crea una lista(arrays) separando los valores por el carácter otorgado(recomendado por mí: ",")
+let cadena =  "pruebazExámenzcuaderno "
+
+resultado = cadena.split("z")
+
+document.write(resultado[0])
+---------------------------
+substrings() nos muestra la  cadena desde la posición inicial hasta la posición final(las posiciones la establecemos nosotros)
+let cadena =  "pruebazExámenzcuaderno "
+
+resultado = cadena.substring(0,6)----> desde cero hasta 5 (el 6 no lo cuenta)
+
+document.write(resultado)
+---------------------------
+toLowerCase(): convierte la cadena completa a minúscula
+
+let cadena =  "pruEBazExámenzcuaderno "
+
+resultado = cadena.toLowerCase()
+
+document.write(resultado)
+-------------------------
+toUpperCase(): convierte la cadena completa a mayúscula
+let cadena =  "pruEBazExámenzcuaderno "
+
+resultado = cadena.toUpperCase()
+
+document.write(resultado)
+-----------------------
+toStrings(): convierte toda la cadena a strings(texto)
+let cadena =  30
+
+resultado = cadena.toString()
+
+document.write(3 + resultado)
+----------------------
+trim() : Remueve los espacios en blanco
+let cadena =  "  hola "
+
+resultado = cadena.trim()
+
+document.write(resultado)
+----------------------
+trimEnd(): Elimina los espacios del final
+let cadena =  "  hola  "
+
+resultado = cadena.trimEnd()
+
+document.write(resultado)
+--------------------
+trimStart(): Elimina los espacios del comienzo
+let cadena =  "  hola  "
+
+resultado = cadena.trimStart()
+
+document.write(resultado)
+-----------------------
+_______Métodos de arrays______. Transformadores
+pop(): saca el último elemento de un array y lo muestra en pantalla.... si muestras en pantalla luego de sacar el elemento, te va a mostrar la  array  completa menos el elemento extraído
+let cadena =  ["hola","chao","ayer"]
+
+resultado = cadena.pop()
+document.write(resultado)---> muestra solo el último elemento(elemento extraído)
+document.write(cadena)----> muestra la lista sin el último elemento
+----------------------
+shift(): saca el primer elemento de un array y lo muestra en pantalla.... si muestras en pantalla luego de sacar el elemento, te va a mostrar la  array  completa menos el elemento extraído
+let cadena =  ["hola","chao","ayer"]
+
+resultado = cadena.shift()
+
+document.write(resultado)---> Muestra solo  el primer elemento(Elemento extraído)
+document.write(cadena)----> Muestra la lista sin el elemento extraído(primer elemento)
+-------------------------
+push(): Agregar elementos a una array 
+let cadena =  ["hola","chao","ayer"]
+
+resultado = cadena.push("mañana,lunes")---> agregando el elemento
+
+document.write(resultado + "<br>")--->muestra la cantidad de elementos (y/o) la posición del último elemento agregado
+document.write(cadena) ---> muestra la lista con  elemento agregado
+--------------------------
+reverse(): revierte el orden de la lista desde el final hasta el comienzo
+let cadena =  ["hola","chao","ayer"]
+
+resultado = cadena.reverse()
+cadena.reverse()---> no hace falta colocar variable
+document.write(resultado + "<br>")
+-------------------------
+unshift() : Agrega elementos al principio de la array
+let cadena =  ["hola","chao","ayer"]
+
+resultado = cadena.unshift("mañana,lunes")
+
+document.write(resultado + "<br>")--->
+document.write(cadena)
+-----------------------
+sort() : Ordena los elementos (léxico gráfico) del 1 al 100... y alfabéticamente
+let cadena =  ["hola","chao","ayer"]
+
+resultado = cadena.sort()---- No hace falta colocar variable
+cadena.sort()
+document.write(cadena)
+-------------------------
+splice() :  Reemplaza o elimina elementos ..... y se puede agregar nuevos elementos por los anteriores
+let cadena =  ["hola","chao","ayer"]
+
+resultado = cadena.splice(1,1,"lunes","martes")--->(desde, cantidad, nuevos elementos)...para agregar elementos al final se coloca -1 ---> (-1,0,"lunes","martes")pero elimina el último
+document.write(cadena)
+------------------------Accesores
+join() : crea un  strings en donde los separadores(,) se pueden cambiar 
+let cadena =  ["hola","chao","ayer"]
+
+resultado = cadena.join("<br>resultado: ")----> los  separadores(,) se intercambian   
+document.write("resultado: "  + resultado) 
+-------------------------
+slice() : Muestra los elementos de un array desde una posición establecida hasta otra
+let cadena =  ["hola","chao","ayer"]
+
+resultado = cadena.slice(0,2)---> para  colocar el final colocamos (0,-1)
+document.write(resultado)
+------------------
+para las listas también están(funcionan de la misma forma):include(),indexOf(),lastIndexOf(),
+---------------------------------De repetición
+forEch() es lo mismo que filter menos la condición
+let cadena =  ["hola","chao","ayer"];
+
+cadena.forEch(resultado => document.write(resultado + "<br>"));function flecha
+
+---------------length: devuelve la cantidad de carácteres en un strings, y la cantidad de elementos de un array
+------------------------
+filter():recorre la lista completa(es como un bucle) y toma como parámetro una function....también nos da la posibilidad de colocar una condición                                           
+                                                        
+let cadena =  ["hola","chao","ayer"];
+
+dias = cadena.filter(resultado => resultado.length > 2);  
+
+document.write(dias)                                
+---------------------------
+Objetos Math
+---------------------------Métodos
+Math.sqrt() muestra la raíz cuadrada de un número
+let numero =  Math.sqrt(25)
+
+document.write(numero)
+-----------------------
+Math.cbrt() : muestra la raíz cúbica de un número
+let numero =  Math.cbrt(25)
+
+document.write(numero)
+-----------------------
+Math.max(): devuelve el número más alto
+let numero =  Math.max(27,4,34,5,6,3,34,42,331,32)
+
+document.write(numero)
+------------------------
+Math.min(): Devuelve el número menor
+let numero =  Math.min(27,4,34,5,6,3,34,42,331,32)
+
+document.write(numero)
+
+------------------------
+Math.random(): Devuelve un número pseudo-aleatorio entre 0 y 1
+let numero =  Math.random()
+
+document.write(numero)
+-------------------------
+Math.round(): Redondea los números al más cercano
+numero =  Math.random()*100
+numero = Math.round(numero)
+document.write(numero)
+-----------------------
+Math.floor() : Redondea siempre para abajo
+numero =  Math.random()*100
+numero = Math.floor(4.9)
+document.write(numero)
+----------------------
+Math.trunc() : elimina los décimales 
+let numero = Math.trunc(7.887687)
+document.write(numero)
+------------------------
+Math.PI(): Ratio de la circunferencia de un círculo respecto a  su  diámetro
+let numero = Math.PI(7.887687)
+document.write(numero)
+-----------------------
+sqrt1_2(): Raíz cuadrada de 1/2
+sqrt2(): Raíz cuadrada de 2
+------------------------
+Math.E() : Constante de Euler
+-----------------------
+Math.LN2(): Logaritmo natural de 2
+------------------------
+Math.LN10(): Logaritmo natural de 10
+----------------------
+MATH.LOG2E(): Logaritmo de E con base 2
+------------------------
+MATH.LOG10E(): Logaritmo de E con base 10    
+----------------------------
+Console: 
+--------------------------Funciones  de registro
+assert() : Aparace un mensaje de error en la consola si la afirmación es falsa. Si la afirmación es verdadera, no aparecerá  nada.(NO  ESTANDAR)
+--------------------------
+Clear(): Limpia la consola
+----------------------
+error(): Muestra un mensaje de error 
+console.error("pá que haces?")
+-----------------------
+info(): Muestra un texto  informativo
+console.info("pá que haces con eso?")
+-------
+log(): prácticamente lo igual que info()
+----------------------
+table(): Crea un tabla donde nos muestra la posición y el valor de un elemento dentro de un objeto
+console.table([23,234,342,1,21,2,3])
+---------------------
+console.warn(): Crea un mensaje de advertencia
+console.warn("papi cuidado con eso!")
+-----------------------
+dir(): Despliega una lista interactiva de las propiedades del objeto JavaScript especificado.
+-------------------Funciones de conteo
+count(): Cuenta cuantas veces se usó un objeto
+function numero(a,b){
+    console.count()
+}
+---------------------funciones de agrupación
+group(): crea grupos donde puedes trabajar dentro de ellos(y grupos dentro de los grupos)...
+para eliminar los grupos se coloca groupEnd()
+groupCollapsed() : crea grupos abiertos (cambia de estado)
+---------------------Funciones de temporización
+time(): Crea  un temporizador
+timeLog(): muestra la cantidad de tiempo que lleva  el temporizador 
+timeEnd():  finaliza el temporizador
+console.time()
+function numero(a,b){ Esto sirve por ejemplo para saber cuanto dura el tiempo de ejecución de las cosas
+    console.timeLog()
+}
+
+numero(1,2)
+numero(1,2)
+numero(1,2)
+
+console.timeEnd()
+--------------------
+Editas un elemento dentro de la consola:
+console.log("%cSoy una lacra hijo","color:#fff;background:#000;padding:30px;")
+---------------------------------------------
+_____Dom_____.
+Nodo: Es todo lo que está en el document(Html)
+------------
+tipos de Nodos: 
+*Document: El nodo document es el nodo raíz, a partir del cual derivan el resto de nodos
+*Element: Nodos definidos por etiquetas html.
+*Text: El texto dentro de un nodo element se considera un nuevo nodo hijo de tipo text
+*Attribute: Los atributos de las etiquetas se definen nodos,(en javScript no lo veremos como nodos, sino como información asociada al nodo de tipo element)
+*Comentarios y otros: Los comentarios  y otros elementos como las declaraciones doctype en cabecera de los documentos HTML generan nodos
+-------------------------------------------
+________Métodos de  selección de elementos________.
+-----------------
+document.getElementById():Selecciona un objeto id 
+Ejemplo:
+parrafo  = document.getElementById("parrafo")
+document.write(parrafo)
+-----------------
+document.getElementsByTagName(): Selecciona los elementos(etiquetas)....nos lo devuelve como una lista
+Ejemplo: 
+parrafo  = document.getElementsByTagName("p")
+document.write(parrafo[0])
+-----------------
+document.querySelector(): Selecciona un elemento de selectores(class,ID,etc)
+Ejemplo:
+parrafo  = document.querySelector(".parrafo")
+document.write(parrafo)
+------------------
+document.querySelectorAll(): Selecciona todos los elementos que coincidan con el selector
+Ejemplo:
+parrafo  = document.querySelectorAll(".parrafo")
+document.write(parrafo)--->Si son mas de un selector Nos devuelve un [node List]
+------------------------------------------------
+__________Métodos para definir, obtener y eliminar valores de atributos_______________.
+setAttribute(): Modifica los atributos anteriores por un nuevo valor.... también se pueden crear atributos
+Ejemplo:
+Creando nuevo valor:
+range.setAttribute("type","text")
+reemplazando atributo:
+range.setAttribute("type","text")---->(atributo a remplazar, valor nuevo)
+-------------
+Obteniendo el valor de un atributo: 
+valorDelAtributo = range.getAttribute("type")
+document.write(valorDelAtributo)
+Otra manera de hacerlo: 
+document.write(valorDelAtributo.valorDelAtributo = range.getAttribute("type"))
+--------
+removeAttribute(): Remueve el atributo(lo elimina)
+-------------------------------------------------------
+_________Atributos globales_________.
+contentEditable: Se usa para editar un elemento desde la pagina
+Ejemplo:
+titulo.setAttribute("contentEditable","True")
+----------------------
+dir: eliges la dirección del elemento
+Ejemplo: 
+titulo.setAttribute("dir","rtl")
+------------------------
+hidden: oculta  el elemento
+Ejemplo: 
+titulo.setAttribute("hidden","false o true")
+------------------------
+tabindex: hace focus al elemento(al darle a tab) y en HTML ordena la posición cuando el usuario le da a tab(tabulador)
+Ejemplo: 
+titulo.setAttribute("tabindex","6")
+---------------------
+title: Cambiael valor de title
+titulo.setAttribute("title","ke")
+-----------------------------
+________Atributos de input________. No hace falta  colocar document.write
+className: Nos muestra lo que está dentro de class
+Ejemplo: 
+document.write(input.className)
+---------------
+value: Nos muestra lo que está dentro de value
+document.write(input.value)
+---------------
+type: Cambiando el valor de type
+Ejemplo:  
+document.write(input.type = "text") 
+-----------------
+accept: acepta los tipos de archivo que  coloquemos
+input.accept = "image/gif"
+-----------------------
+minLength: Minimo de carácteres en un input  por el usuario
+Ejemplo: 
+input.minLength = 4;
+------------------------
+input.placeholder  = "todo ben"
+-------------------------
+required: "Requiere que coloques algún valor al input"
+Ejemplo:
+input.required = 4;---> con cualquier valor que se colque es suficiente
+----------------------------
+_________style________.
+propiedades CamelCase: Se reemplaza los guiones por Mayúsculas----> titulo.style.backgroundColor = "#000"
+Editar:   titulo.style.color = "#000"
+--------------------------------------
+________Clases, classlist y métodos de classlist________.
+classList.add(): Añade una clase
+Ejemplo:
+titulo.classList.add("Hola")
+-----------------
+classList.remove(): Remueve una clase
+titulo.classList.remove("hola")
+------------------
+classList.item(): accedemos a las clases por su posición(Se usa para pedir la información)
+Ejemplo:
+titulo.classList.item(2)
+-----------------
+classList.contains(): Verificamos si se encuentra una clase
+Ejemplo:
+const titulo = document.querySelector(".titulo");
+let clase = titulo.classList.contains("hola");
+document.write(clase)
+-----------------
+classList.toggle(): Si no se encuentra la  clase, se agrega y si se encuentra la remueve
+Ejemplo: 
+const titulo = document.querySelector(".titulo");
+titulo.classList.toggle("hola");
+-----------------
+classList.replace(): Reemplaza una clase por otra 
+Ejemplo: 
+const titulo = document.querySelector(".titulo");
+titulo.classList.replace("hola","loco");---->(clase a reemplazar, y clase nueva)
+-------------------------------
+________obtención y Modificación de elementos_______.
+textContent(): Devuelve el texto de cualquier nodo(elemento) solo el texto
+Ejemplo:
+const titulo = document.querySelector(".titulo");
+resultado = titulo.textContent
+document.write(resultado)
+----------------------
+innertHTML: Muestra todo el contenido HTML
+const titulo = document.querySelector(".titulo");
+let resultado = titulo.innerHTML;
+document.write(resultado)
+----------------------
+outerHTML: Muestra todo el contenido incluyendo todo el elemento HTML completo (Toda la etiqueta)
+Ejemplo:
+const titulo = document.querySelector(".titulo");
+
+let resultado = titulo.outerHTML;
+
+document.write(resultado)
+-----------------------
+_______Creación de elementos______. ---->(Objetos)
+createElement(): Crea un elemento(etiqueta) 
+Ejemplo:
+const contenedor = document.querySelector(".contenedor");
+
+const objeto = document.createElement("LI");
+
+document.write(objeto)
+---------------------
+createTextNode(): Crea un nodo de texto
+Ejemplo: 
+const contenedor = document.querySelector(".contenedor");
+
+const objeto = document.createElement("LI");
+
+const text = document.createTextNode("Este es un objeto de la lista")
+--------------------
+appendChild(): Crea y/o agrega un elemento hijo(dentro de un elemento padre)
+Ejemplo: 
+const contenedor = document.querySelector(".contenedor");
+const objeto = document.createElement("LI");
+const text = document.createTextNode("Este es un objeto de la lista");
+objeto.appendChild(text);
+console.log(objeto)
+-----------------------
+///////////////////////////////////////////////////////////////////////
+Agregando un elemento al contenedor 
+const contenedor = document.querySelector(".contenedor");
+const objeto = document.createElement("LI");
+const text = document.createTextNode("Este es un objeto de la lista");
+contenedor.appendChild(objeto)
+///////////////////////////////////////////////////////////////////////
+-----------------------
+createDocumentFragment(): Se usa para agregar varios elementos al padre(contenedor)de manera mas renderizada
+Ejemplo: 
+const contenedor = document.querySelector(".contenedor");
+
+const fragmento = document.createDocumentFragment();
+
+for(let i = 0;i < 20; i++){
+    const objeto = document.createElement("LI");
+    objeto.innerHTML= "Este es un objeto de la lista";
+    fragmento.appendChild(objeto)
+
+}
+contenedor.appendChild(fragmento)
+-----------------------------------
+________Obtención y modificación de childs (hijos)_______. (Usar firstElementChild y lastElementChild siempre)
+firstchild: Nos muestra el primer nodo(elemento) del contenedor...(los espacios actúan como nodos, osea que no se puede poner espacio si queremos que se muestre bien)
+Ejemplo:
+const contenedor = document.querySelector(".contenedor");
+const primerHijo = contenedor.firstChild;
+console.log(primerHijo)
+-----------------
+lastChild: Nos muestra el último elemento(nodo)del contenedor...(los espacios actúan como nodos, osea que no se puede poner espacio si queremos que se muestre bien)
+Ejemplo: 
+const contenedor = document.querySelector(".contenedor");
+const primerHijo = contenedor.lastChild;
+console.log(primerHijo)
+-----------------
+firstElementChild: Nos muestra el primer elemento del contenedor(No importa si tiene espacios).
+Ejemplo:
+const contenedor = document.querySelector(".contenedor");
+const primerHijo = contenedor.firstElementChild;
+console.log(primerHijo)
+-----------------
+lastElementChild: Nos muestra el último elemento del contenedor(No importa si tiene espacios).
+Ejemplo:
+const contenedor = document.querySelector(".contenedor");
+const primerHijo = contenedor.lastElementChild;
+console.log(primerHijo)
+-----------------
+childNodes: Nos devuelve todos los  hijos(incluyendo los espacios),(en un nodesList)--->actúa como array pero no lo es.
+Ejemplo:
+const contenedor = document.querySelector(".contenedor");
+const primerHijo = contenedor.childNodes;
+console.log(primerHijo)
+------------------
+children: Nos devuelve solo los elementos(etiquetas,(los espacios no).
+Ejemplo: 
+const contenedor = document.querySelector(".contenedor");
+const primerHijo = contenedor.children;
+console.log(primerHijo)
+------------------
+///////////////////////////////
+Recorriendo un contenedor.children:  
+const contenedor = document.querySelector(".contenedor");
+const primerHijo = contenedor.children;
+for (hijos of primerHijo){
+    console.log(hijos)
+}
+///////////////////////////////
+-------------------
+_______Métodos de hijos______.
+replaceChild(): Reemplaza un hijo por otro
+Ejemplo: 
+const contenedor = document.querySelector(".contenedor");
+const parrafo = document.createElement("P").innerHTML = "parrafo";
+const h2Nuevo = document.createElement("H2");
+h2Nuevo.innerHTML = "titulo";
+h2Viejo = document.querySelector(".h2");
+contenedor.replaceChild(h2Nuevo,h2Viejo);
+------------------
+removeChild(): Remueve un hijo
+Ejemplo: 
+const contenedor = document.querySelector(".contenedor");
+h2Viejo = document.querySelector(".h2");
+contenedor.removeChild(h2Viejo);
+---------------------
+hasChildNodes(): Nos dice si tiene hijos o no(false o true) (toma como hijos los espacios también)
+Ejemplo:
+respuesta=contenedor.hasChildNodes();
+document.write(respuesta);
+----------------------
+parent.element: Nos muestra el elemento padre(contenedor)
+Ejemplo: 
+h2Viejo = document.querySelector(".h2");
+console.log(h2Viejo.parentElement);
+-----------------------
+______Propiedades de siblings(Hermanos)_______.(Los hermanos son los elementos dentro del contenedor)
+nextSibling: Nos muestra el nodo que le sigue
+Ejemplo: 
+h2Viejo = document.querySelector(".h2");
+console.log(h2Viejo.nextSibling)
+----------------------
+previousSibling: Nos muestra el nodo anterior
+Ejemplo: 
+h2Viejo = document.querySelector(".h2");
+
+console.log(h2Viejo.previousSibling)
+-----------------------
+nextElementSibling: Nos muestra el elemento que le sigue
+Ejemplo:
+h2Viejo = document.querySelector("h4");
+console.log(h2Viejo.nextElementSibling)
+-----------------------
+previousElementSibling: Nos muestra el elemento anterior
+Ejemplo: 
+h2Viejo = document.querySelector("h4");
+
+console.log(h2Viejo.previousElementSibling)
+----------------------
+closest(): Nos muestra el contenedor(completo) más cercano en donde está el elemento
+Ejemplo: 
+div= document.querySelector(".div-3");
+
+console.log(div.closest(".div"))    
+
+
+
+
+document.body: Accedemos al body 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

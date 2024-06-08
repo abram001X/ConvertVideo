@@ -1,0 +1,1259 @@
+/*_______Prototipos________.(volver ver los prototypos)  El "set" : crea cosas se usa para crear(sobreescribir etc..).. formato(desde 1 deenero de 1970 hasta la actualidad en milisegundos) (JSON no nos funciona con espacios en blanco todo tiene  que estar en una sola línea
+Para acceder a un prototipo que está heredado se usa __proto__
+Ejemplo:
+let  objeto  = {
+    "propiedad": "datos"
+};
+console.log(objeto.__proto__);
+------------
+Para acceder a un prototipo que creamos se usa prototype
+Ejemplo:
+let  objeto  = function hol(){};
+console.log(objeto.prototype);
+...
+...
+...
+...
+...
+_____strict mode____.(Solo funciona si lo colocas de primero en un bloque o en todo el script)...(convierte todos los errores que java deja pasar en excepciones(errores de consola)
+declarar vaiables: Cuando usamos strict mode(use strict) hay que declarar las variables.
+Ejemplo:
+"use strict"; --->inicializamos el modo estricto
+let nombre = "pepe"; ---> si no lo declaramos nos tira un error
+console.log(nombre)
+---------------
+Forma de crear una propiedad: 
+"use strict";
+
+const obj = {};
+
+Object.defineProperty(obj,`nombre`,{value: "pepe",writable: false});--->(variable,propiedad{value: (valor)});
+Object.defineProperty: Crea una propiedad.
+writable: Si está en false no njos deja reescribir una variable.
+
+obj.nombre = "hola";
+console.log(obj.nombre)
+----------------
+Object.preventExtensions: estamos prohibiendo que se defina nuevas propiedades
+"use strict";
+
+const obj = {nombre: "lucas"};
+
+Object.preventExtensions(obj);
+
+obj.apellido = "dalto" ---> Devuelve un error porque es "use strict"
+console.log(obj.apellido)
+
+----------------
+no se pueden agregar propiedades a los strings:
+"use strict";
+
+const str = "hola";
+str.chao = "chao";
+---------------
+no se puede colocar parámetros iguales:  
+function  hablar(texto,texto){----> java usa el ultimo parámetro y use script tira un error
+    console.log(texto);
+}
+
+hablar("pedro","pepe")
+-----------------
+delete: se usa para eliminar propiedades de objetos
+Ejemplo: 
+const objeto = {
+    nombre: "abraham"
+}
+
+delete objeto.nombre
+
+console.log(objeto)
+-----------------
+Con use strict se puede borrar las variables y las  funciones con delete
+Ejemplo: 
+"use strict"
+const objeto = {
+    nombre: "abraham"
+}
+
+delete objeto.nombre
+
+console.log(objeto)
+---------------
+Algunas palabras reservadas no se pueden usar con "user strict".
+Ejemplo: 
+"use strict";
+
+let package = "hola"
+
+console.log(package)
+----------------
+Los números octales se le colocan el después del 0
+Ejemplo:
+sin use strict:
+console.log(023);
+............}
+Con "use strict": 
+console.log(0o23);
+-------------
+arguments y eval no se pueden usar como variables
+
+
+-------------
+Si use strict está dentro de un bloque solo  funciona dentro  de ese bloque
+nombre = "pepe" ---> la variable se puede usar sin declarar porque el use strict está dentro de la función
+
+function decir(){
+    "use strict";
+    console.log(nombre)
+}
+decir()
+--------------------
+____Funciones flechas____.
+Estructura: 
+const saludar = ()=>{ ---> Cuando  los valores están adentro de las llaves, son sentencias
+    console.log("hola");
+    console.log("como estas?");
+}
+saludar()
+........
+const saludar = ()=> "hola pá"; ---> cuando es un solo valor es una expresión y se returna solo
+
+resultado = console.log(saludar())
+---------------
+Parentesis opcionales ante un solo parámetro (sin parámetros se requiere parentesis)
+const saludar = saludo=> "hola pá " + `${saludo}`;
+resultado = console.log(saludar(" todo bien?"))
+---------------
+No es recomendado usar la funciones flechas como método: 
+Ejemplo: 
+"use strict";
+
+const objeto  = {
+    nombre : "lucas",
+    saludar : ()=>{console.log(`hola ${this.nombre}`)}
+}
+objeto.saludar()
+Usar una función normal: 
+"use strict";
+
+const objeto  = {
+    nombre : "lucas",
+    saludar : function(){console.log(`hola ${this.nombre}`)}
+}
+objeto.saludar()
+-----------------
+Las funciones flechas no pueden ser constructores
+Ejemplo: 
+"use strict";
+
+const constructorPersona = (nombre,apellido)=>{
+    this.nombre = nombre;
+    this.apellido = apellido;   
+}
+const persona  = new constructorPersona("lucas","Dalto");
+console.log(persona)
+-----------------
+____this contextual____.
+This fuera de una función es window(siempre)
+Ejemplo: 
+"use strict";
+
+console.log(this === window)
+console.log(window)
+--------------
+This con la función normal se crea en el bojeto que lo está llamando (forma parte del objeto que seria la función).
+Ejemplo:
+
+this.nombre = "dalto"
+function saludar(){
+    console.log(`hola ${this.nombre}`)--->Saludar es el objeto que llama a this
+}
+const objeto = {
+    nombre: "lucas",
+    saludar: saludar --->esto es un metodo... Esto llama a la función  saludar(osea que el this.nombre sería "lucas" porque así se define dentro del bloque objeto.
+
+}
+objeto.saludar()
+-----------------
+Si this estuviera dentro de una función flecha el nombre seria el primer this.nombre
+Ejemplo: 
+"use strict";
+
+this.nombre = "dalto"
+const saludar = ()=>{
+    console.log(`hola ${this.nombre}`); ---->el nombre sería "dalto" porque es función flecha
+}
+const objeto = {
+    nombre: "lucas",
+    saludar: saludar
+}
+objeto.saludar()
+...................}
+Ejemplo#2: 
+"use strict";
+
+this.nombre = "dalto"
+
+const saludar = ()=>{
+    console.log(`hola ${this.nombre}`);
+}
+
+const objeto = {
+    nombre: "lucas",
+    saludar----> si la propiedad es igual al valor no hace falta colocarlo como el anterior ejemplo
+}
+
+objeto.saludar()
+............}
+Ejemplo#3: 
+"use strict";
+
+this.nombre = "dalto";
+const objeto = {
+    nombre: "lucas",
+    saludar : ()=>{
+        console.log(`hola ${this.nombre}`);
+    }
+}
+function otroContext(){
+    nombre =  "Pedro"; ---> cambia el this.nombre(modifica el this.nombre global)
+    objeto.saludar();
+}
+otroContext()
+---------------------
+____Características de funciones____.
+funciones recursivas: 
+Ejemplo : 
+const validaEdad = (msg)=>{
+    let edad;
+    try{
+        if(msg) edad = prompt(msg);
+        else edad = prompt("Coloca tu edad tonto");
+        edad = parseInt(edad);
+        if (isNaN(edad)) throw "papa, comentame el número de tu edad";
+        if(edad >= 18) console.log("eres mayor de edad");
+        else console.log("Sos menor de edad")
+    }catch(e){
+        validaEdad(e)
+    }
+}
+validaEdad()
+-------------
+Clausuras : 
+"use strict";
+
+const cambiarTamaño = tamaño =>{
+    return ()=> {
+        document.querySelector(".texto").style.fontSize = `${tamaño}px`;
+    }
+}
+let px12 = cambiarTamaño(12);
+let px14 = cambiarTamaño(14);
+let px16 = cambiarTamaño(16);
+
+document.querySelector(".t12").addEventListener("click",px12);
+document.querySelector(".t14").addEventListener("click",px14);
+document.querySelector(".t16").addEventListener("click",px16);
+--------------------
+Parámetros por defecto(Validación antigua vs nueva): 
+"use strict";
+const suma = (a,b)=>{
+    console.log(a+b);
+}
+suma(10);---->  Nos devuelve NaN
+3 formas para que no nos devuelva  NaN: 
+#1:(no recomendado)
+"use strict";
+const suma = (a,b)=>{
+    b = typeof b !== "undefined" ? b: 0;
+    console.log(a+b);
+}
+suma(10); 
+/////////
+#2:
+"use strict";
+const suma = (a,b)=>{
+    b = b || 0; ----> b es igual a b o a cero (si b no tiene valor se iguala a cero)
+    console.log(a+b);
+}
+suma(10);
+#3:
+"use strict";
+const suma = (a = 0,b = 0)=>{ ----> si los parámetros no tienen valor  se igualan a cero.
+
+    console.log(a+b);
+}
+suma(10);
+-------------
+Parámetro rest(...parametro):
+"use strict";
+const suma = (...sumar)=>{----> esto devuelve un array (siempre se coloca como ultimo parámetro)
+     console.log(sumar[0]+sumar[1]+sumar[2])
+}
+suma(10,12,23);----> losw parámetros se agregan al array
+---------------
+Operador condicional(ternario): 
+Ejemplo#1:
+antes de los dos puntos es true(if) y después es else (false);
+"use strict";
+let edad = 17; 
+(edad > 18) ? console.log("es mayor de edad") : console.log("Es menor de edad");
+Ejemplo#2: 
+let edad = 123; 
+(edad > 18) ? (
+    console.log("Es menor de edad"),
+    console.log("no puedes pasar")
+    ) 
+    : console.log("Es mayor de edad");
+------------------
+Operador  Spread(Spread operator [...]): 
+"use strict";
+ let array  = ["hola","chao","pepe"];
+console.log(...array) ----> Colocando los tres puntos delante del array se desarma(osea que nos devuelve un string).
+/////////
+Agrega elementos de un array a otro: 
+"use strict";
+ let array  = ["hola","chao","pepe"];
+let array2 = ["pedro","lacra","loca"];
+
+array.push(...array2);
+
+console.log(array)
+//////////
+Concatenar arrays:
+"use strict";
+ let array  = ["hola","chao","pepe"];
+let array2 = ["pedro","lacra","loca"];
+
+let array3 = [...array,...array2];
+
+console.log(array3)
+//////////////
+Como argument o rest
+----------------------
+_____Apis___.
+Objeto date: es un constructor;
+--------------------
+getDate(): Nos devuelve la fecha del mes.   
+Ejemplo: 
+"use strict";
+const fecha = new Date(); 
+console.log(fecha.getDate())
+------------
+getDay(): Nos devuelve el día.
+Ejemplo: 
+"use strict";
+
+const fecha = new Date(); 
+
+console.log(fecha.getDay())----> Lo devuelve por indices(es un arreglo)
+--------------------
+getMonth(): Nos devuelve el mes
+Ejemplo: 
+"use strict";
+
+const fecha = new Date(); 
+
+console.log(fecha.getMonth())--->También por indice
+---------------------
+getYear(): Devuelve el año actual menos 1900
+Ejemplo: 
+"use strict";
+
+const fecha = new Date(); 
+
+console.log(fecha.getMonth())----> Devuelve 124(2024-1900)
+----------------------
+gethours(),getMinutes(),getSecond():
+Ejemplo: 
+"use strict";
+
+const fecha = new Date();--->se puede colocar parámetros a date  
+
+console.log(fecha.getHours()); -->Horas
+console.log(fecha.getMinutes());--->Minutos
+console.log(fecha.getSeconds());--->Segundos
+----------------------Buscar en internet: (date java )para seguir viendo getdates
+Date.now():Devuelve los miliseundos que pasaron desde el 1 de enero 1970
+Ejemplo: 
+"use strict";
+console.log(Date.now());
+----------------------
+___LocalStorage y sessionStorage___.
+sessionStorage: Cuando cargamos la pagina se pierde la info.
+LocalStorage : si cargamos la pagina no se pierde la info.
+---------------
+localStorage: Si salimos seguirá en la paina porque se almacena en aplication.
+Ejemplo: 
+localStorage.setItem("nombre","pepe")--->  con set item definimos (aparece en aplications  storae)
+console.log(localStorage.getItem("volume")
+----------------
+sessionStorage: Se usa igual que localstorage solo que no sae guarda la info..simple.
+RemoveItem(): Remueve un item
+Ejemplo:
+sessionStorage.setItem("nombre","pepe");
+setTimeout(()=>{   
+let nombre = sessionStorage.removeItem("nombre"); ---> se  tiene que remover la  propiedad completa
+},2000)
+-----------------
+clear(): Borra  todo dentro de LocalStorage o sessionStorage
+Ejemplo: 
+sessionStorage.setItem("nombre","pepe");
+setTimeout(()=>{   
+let nombre = sessionStorage.clear("nombre"); ---> se  tiene que remover la  propiedad completa
+},2000)
+---------------------(Ver en internet)
+____Drag & drop___.
+Es cuando deslizamos(arrastramos)un objeto
+.....................
+Eventos del objeto: 
+"dragstart": (Se ejecuta) cuando agarras el objeto
+"drag": (Se ejecuta) mientras estás agarrando el objeto.
+"dragend":(Se ejecuta) cuando sueltas el objeto.
+Ejemplo:
+
+"use strict";
+const crculo = document.querySelector(".crculo"); 
+
+crculo,addEventListener("dragstart",()=>console.log(1));
+crculo,addEventListener("drags",()=>console.log(2));
+crculo,addEventListener("dragsend",()=>console.log("soltado"));
+------------------
+Eventos de zona: 
+dragenter: (Se ejecuta) cuando el objeto entra en el otro objeto seleccionado
+dragover: (Se ejecuta)  cuando el objeto está por encima
+drop: (Se ejecuta) cuando se suelta
+dragleave: (Se ejecuta) cuando se sale del objeto seleccionado
+Ejemplo: 
+"use strict";
+const crculo = document.querySelector(".crculo"); 
+const rectangulo = document.querySelector(".rectangulo");
+
+rectangulo.addEventListener("dragenter",()=>console.log(1));
+rectangulo.addEventListener("dragover",()=>console.log(2)); ---->"dragover": no deja ejecutar el drop por una propiedad predeterminada que tiene
+rectangulo.addEventListener("drop",()=>console.log(3));
+rectangulo.addEventListener("dragleave",()=>console.log(4));
+
+Ejemplo#2:
+"use strict";
+const crculo = document.querySelector(".crculo"); 
+const rectangulo = document.querySelector(".rectangulo");
+
+rectangulo.addEventListener("dragenter",()=>console.log(1));
+rectangulo.addEventListener("dragover",(e)=>{
+    e.preventDefault()---> De esta manera podemos ejecutar el 3("drop")
+    console.log(2)}); 
+rectangulo.addEventListener("drop",()=>console.log(3));
+rectangulo.addEventListener("dragleave",()=>console.log(4));
+--------------------
+Propiedad datatransfer:
+datatransfer:  Es  un objeto que transmite información entre el objeto1 que arrastramos y el objeto2 en donde arrastramos al objeto 1
+Ejemplo:  Transfiriendo una info al objeto2 (rectangulo/zona etc)
+"use strict";
+const circulo = document.querySelector(".circulo"); 
+const rectangulo = document.querySelector(".rectangulo");
+
+circulo.addEventListener("dragstart",(e)=>{
+    e.dataTransfer.setData("clase",e.target.className)
+})
+rectangulo.addEventListener("dragenter",()=>console.log(1));
+rectangulo.addEventListener("dragover",(e)=>{
+    e.preventDefault();
+    console.log(2)
+});
+rectangulo.addEventListener("drop",(e)=>{
+    console.log(e.dataTransfer.getData("clase"))
+});
+rectangulo.addEventListener("dragleave",()=>console.log(4));
+----------------  
+
+Creando un seleccionador de pinturas: 
+"use strict";
+
+const zona = document.querySelector(".zona");
+
+
+zona.addEventListener("dragover",(e)=>{
+    e.preventDefault();
+})
+zona.addEventListener("drop",(e)=>{
+    let n = e.dataTransfer.getData("textura");
+    zona.style.background  = `url(textura${n}.png)`
+})
+
+for (let j = 1; j < document.querySelector(".texturas").children.length+1; j++) {
+    document.querySelector(`.textura${j}`).addEventListener("dragstart",(e)=>transferirTextura(j,e))
+}
+
+const transferirTextura = (n,e)=>{
+    e.dataTransfer.setData("textura",n);
+    
+}
+--------------
+___Geolocalization___.
+navigator: Es un objeto que hace referencia al navegador
+getCurrentPosition: Obtiene todos los datos de la  posición actual
+Ejemplo: 
+"use strict";
+
+const geolocation = navigator.geolocation;
+
+const posicion = (pos)=>{
+    console.log(pos.coords.lat);--->nos muestra las coordenadas(parámetro(variable etc),coordenadas,latitude(longitude etc)).
+}
+geolocation.getCurrentPosition(posicion)---> nos pide la ubicación...Mínimo hay que colocarle un parámetro
+-------------
+maximumAge: Le decimos cada cuanto actualiza la info del caché.(por cuanto tiempo se va a utilizar info del caché).
+Ejemplo: 
+"use strict";
+const geolocation = navigator.geolocation;
+
+const posicion = (pos)=>{
+    console.log(pos);
+}
+const err = ()=>console.log(e);
+
+const options{
+    maximumAge: 0,  --> Siempre nos va a dar la info actualizada;
+}
+geolocation.getCurrentPosition(posicion)
+---------------------
+timeout: Tiempo que va a durar para que nos devuelva la info
+Ejemplo: 
+"use strict";
+
+
+const geolocation = navigator.geolocation;
+
+const posicion = (pos)=>{
+    console.log(pos);
+}
+const err = ()=>console.log(e);
+
+const options{
+    maximumAge : 0,
+    timeout : 3000, ---> tiempo que va a tardar en darnos la data.
+}
+geolocation.getCurrentPosition(posicion)
+--------------------
+enableHightAccuracy: Propiedad  que activa la alta precisión en posicionamiento.
+ejemplo:
+"use strict";
+
+
+const geolocation = navigator.geolocation;
+
+const posicion = (pos)=>{
+    console.log(pos);
+}
+const err = ()=>console.log(e);
+
+const options  = {
+    maximumAge: 0,
+    timeout: 3000,
+    enableHightAccuracy: true
+}
+
+geolocation.getCurrentPosition(posicion,err,options)
+----------------
+Buscar  por internet: 
+watchPosition: Ante cambios de la posición la muestra
+clearWatch : Elimina watchPosition
+-------------------------------------------------
+___Historial___. 
+Tenmos dos rutas posibles para trabajar con el historial
+console.log(history.length)--> Es igual 2
+--------------
+back(): Volver atrás(Literalmente vuelve atrás de la pagina)
+Ejemplo: 
+console.log(history.back())--->usar en la consola mejor xd
+--------------
+forward(): Ir hacia adelante(Literalmente vuelve hacia adelante de la pagina).
+Ejemplo: 
+console.log(history.forward())--->usar en la consola mejor xd
+-------------
+go(): Va al sitio indicado con un número relativo.
+Ejemplo: 
+console.log(history.go())--->(si no tiene número o tiene un cero(go(0)) carga la página)usar en la consola mejor xd
+console.log(history.back(1))---> si es go(1) vuelve a la página anterior.
+console.log(history.back(-1))---> Si es go(-1) vuelve hacia atrás.
+----------------
+pushState(): Crea una nueva url pero lo genera como si fuera una pagina nueva.
+Ejemplo: 
+history.pushState({nombre: "pepe"},"","?soy una lacraxd")---->(data,titulo,url);
+/////////////////
+Ejmplo#2: mostrar la data(el estado(state))
+addEventListener("popstate",(e)=>{
+    console.log(e.state)   ---> cuando detecte un popstate va a mostrar ladata que le pasamos
+})
+-------------------
+replacestate(): Modifica la url y no la conserva....(investigar)
+Ejemplo: 
+history.replaceState({nombre: "pepe"},"","?soy una lacraxd")
+----------------
+___fileReader___.
+Trabaja con lecturas de archivos
+FileReader():  se usa para leer los archivos
+Ejemplo: 
+const file = document.getElementById("archivo");
+file.addEventListener("change",(e)=>{//--->"change": ocurre el evento cuando un input cambia de valor
+    leerArchivo(file.files[0]) //----> nos devuelve la cantidad de archivo que estamos seleccionando
+})
+const leerArchivo = ar =>{
+    const reader =  new FileReader(); //--->se usa para leer los archivos
+    reader.readAsText(ar); //---> Está leyendo el archivo Es un método de FileReader()
+    reader.addEventListener("load",(e)=>{
+        console.log(e.target.result)
+    })
+}
+Ejemplo#2: Archivos multiples
+"use strict";
+
+const file = document.getElementById("archivo");
+
+file.addEventListener("change",(e)=>{
+    leerArchivo(file.files) 
+})
+const leerArchivo = ar =>{
+    let j;
+    for (j of ar) {
+        const reader =  new FileReader();
+        reader.readAsText(j);
+        reader.addEventListener("load",(e)=>{
+            console.log(JSON.parse(e.target.result))
+        })
+        
+    }
+}
+-------------
+ReadDataURL(): Lee las imagenes.
+Ejemplo: 
+"use strict";
+
+const file = document.getElementById("archivo");
+
+file.addEventListener("change",(e)=>{//--->"change": ocurre el evento cuando un input cambia de valor
+    leerArchivo(file.files) //----> nos devuelve la cantidad de archivo que estamos seleccionando
+})
+const leerArchivo = ar =>{
+    for (let j = 0; j < ar.length; j++) {
+        const reader =  new FileReader();
+        reader.readAsDataURL(ar[j]);--->Leyendo las imagenes
+        reader.addEventListener("load",(e)=>{
+            let newimg = `<img src='${e.currentTarget.result}'>`;
+            document.querySelector(".resultado").innerHTML += newimg;
+        })
+    }
+}
+---------------------
+_____indexDB____.
+indexedDB: Es una fábrica de bases de datos(objeto).
+Ejemplo: 
+"use strict";
+const request = indexedDB;
+console.log(request)
+--------------
+método open(): Abre una base de dato y si no existe una, la crea.
+Ejemplo: 
+"use strict";
+const request = indexedDB.open("database",1);--->(nombre de la basededato, versión)
+console.log(request) --->devuelve IDBOpenDBRequest
+--------------
+"upgradeneeded": Si la base no existe se va a ejecutar.
+"success": Si la base no existe se va a ejecutar Y si existe también.
+"Error": Se ejecuta cuando hay un error.
+--------------
+|||Object Store||| almacen de objetos  es un lugar donde almacenamos todo. Solo se pueden crear cuando creamos las bases de datos.
+---------------  keyPath: Buscar en google
+Crear almacén de  objetos:
+createObjectStore(): Crea un almacenamiento
+Ejemplo:
+
+Trabajando con  base de datos y almacenamiento: 
+"use strict";
+
+const IDBRequest = indexedDB.open("database",1);
+
+IDBRequest.addEventListener("upgradeneeded",()=>{
+    const db = IDBRequest.result;//--> base de datos
+    db.createObjectStore("nombres",{  //-->(object store,key)
+        autoIncrement :  true //--> A medida que vamos haciendo registros el key va aumentando(Esto es lo  las transacciones que los números no se repiten)
+    });
+})
+IDBRequest.addEventListener("success",()=>{
+    console.log("Todo está perfecto")
+})
+
+IDBRequest.addEventListener("error",()=>{
+    console.log("error")
+})
+
+
+const addObjeto = objeto=>{
+    const db =  IDBRequest.result;
+    //Elegir en donde  ejecutar la transacción
+    const IDBtransaction = db.transaction("nombres","readwrite");//--> (Objector,modo("readwrite":leer  y agregar o "readonly":solo leer))
+    const objectStore = IDBtransaction.objectStore("nombres"); //--> permitir que haga la operación("nombre"),la operación transaction que está arriba
+    objectStore.add(objeto);
+    IDBtransaction.addEventListener("complete",()=>{  //-->"complete": Se ejecuta  cuando se completa
+        console.log("Agregado correctamente");
+    })
+}
+
+//leyendo el almacenamiento
+const leerObjeto  = ()=>{
+    const db =  IDBRequest.result;
+    const IDBtransaction = db.transaction("nombres","readonly");
+    const objectStore = IDBtransaction.objectStore("nombres"); 
+    const cursor = objectStore.openCursor();
+    cursor.addEventListener("success",()=>{
+        if(cursor.result){
+            console.log(cursor.result.value);
+            cursor.result.continue();
+        }
+        else console.log("leído correctamente")
+    }) 
+}
+
+const modificarObjeto = (key,objeto)=>{
+    const db =  IDBRequest.result;
+
+    const IDBtransaction = db.transaction("nombres","readwrite");
+    const objectStore = IDBtransaction.objectStore("nombres"); 
+    objectStore.put(objeto,key);// put(): Si el objeto no existe lo agrega y si existe lo modifica(muy similar open())
+    IDBtransaction.addEventListener("complete",()=>{ 
+        console.log("modificado correctamente");
+    })
+}
+const eliminarObjeto = (key)=>{
+    const db =  IDBRequest.result;
+    const IDBtransaction = db.transaction("nombres","readwrite");
+    const objectStore = IDBtransaction.objectStore("nombres"); 
+    objectStore.delete(key);//-->Elimina un objeto por su key
+    IDBtransaction.addEventListener("complete",()=>{ 
+        console.log("eliminado correctamente");
+    })
+}
+
+(ESTE CÓDIGO SE PUEDE SIMPLIFICAR(SE DEBERÍA DE SIMPLIFICAR))
+------------------------
+Terminar dever File reader+  dra &drops
+-----------------------
+___matchMedia___. Usar para cambiar y agregar clases etc. No usar para estilos eso se hace con css
+matchMedia(): Funciona como mediaquery(@media css)
+Ejemplo: 
+"use strict";
+const mq = matchMedia("(max-width: 500px)") //--> Funciona como mediaquery(@media css)
+mq.addEventListener("change",()=>{
+    console.log("resolución cambiada")
+})
+console.log(mq.matches)---> Devuelve true o false 
+Ejemplo#2.
+
+"use strict";
+
+const mq = matchMedia("(max-width: 500px)") //--> Funciona como mediaquery(@media css)
+const caja = document.querySelector(".caja");
+
+mq.addEventListener("change",()=>{
+   if(mq.matches) caja.classList.replace("caja","responsive-caja");
+   else if (caja.className == "responsive-caja") caja.classList.replace("responsive-caja","caja");
+})
+
+---------------
+___intersection Observer___.
+IntersectionObserver()--> parámetros(callback,options)
+observe(): Es un método que lo que hace es observar el elmento que le digamos
+Ejemplo:  
+"use strict";
+const caja3 = document.querySelector(".caja3");
+const  verifyVisibility = entries =>{ --> Nos va a dar entradas(siempre nos va a devolver un arreglo(array))
+    const entry = entries[0];-->Aceddiendo al primer elemento
+    console.log(entry)
+    console.log(entry.isIntersecting)--->Si vemos el elemento Devuelve true si nolo vemos devuelve false
+}
+const observer = new IntersectionObserver(verifyVisibility,);
+
+observer.observe(caja3)
+-----------------
+Options: Le decimos cuando nos va a decir que estamos viendo el elemento...Buscar por google
+Ejemplo:
+const options = {
+    rootMargin: "60px"
+}
+********************************
+Creando lazyload Cargade publicaciones
+
+"use strict";
+
+const publicaciones = document.querySelector(".publicaciones")
+let contador = 0;
+
+const createPubl = (name,content)=>{
+    const container = document.createElement("DIV");
+    const comentarios = document.createElement("DIV");
+    const nombre = document.createElement("H3");
+    const btnComentario = document.createElement("INPUT");
+    const btnEnviar= document.createElement("INPUT");
+    const contenido =  document.createElement("P");
+
+
+    container.classList.add("publicacion");
+    comentarios.classList.add("comentarios");
+
+    btnEnviar.classList.add("enviar");
+    btnComentario.classList.add("comentarios");
+
+    btnComentario.setAttribute("placeholder","Introduce un comentario");
+    nombre.textContent = name;
+    contenido.textContent = content;
+    comentarios.appendChild(btnComentario);
+    comentarios.appendChild(btnEnviar);
+
+    btnEnviar.type  = "submit"
+    container.appendChild(nombre);
+    container.appendChild(contenido); 
+    container.appendChild(comentarios);
+    return container
+}
+
+const cargarMasPublis = entry =>{
+    if(entry[0].isIntersecting) cargarPublicaciones(4);
+}
+const observer = new IntersectionObserver(cargarMasPublis)
+
+
+
+const cargarPublicaciones = async num=>{
+    const request = await fetch("información.txt");
+    const content= await request.json();
+    const array = content.content; 
+    const documentFragment = document.createDocumentFragment();
+    for(let j = 0; j < num; j++){
+        if(array[contador] != undefined){
+            const newPublicacion = createPubl(array[contador].nombre,array[contador].contenido);
+        documentFragment.appendChild(newPublicacion);
+        contador++;
+        if(j == num-1)observer.observe(newPublicacion)
+        }else{
+            let noMore =  document.createElement("H3")
+            noMore.textContent = "No hay más publicaciones";
+            documentFragment.appendChild(noMore);
+            publicaciones.appendChild(documentFragment);
+            break}    
+    }
+    publicaciones.appendChild(documentFragment);
+}
+cargarPublicaciones(5)
+----------------------
+"visibilitychange": Se ejecuta cuando cambiaqmos de pestaña
+Ejemplo: 
+addEventListener("visibilitychange",()=>{
+    console.log(e.target.visibilitychange)--> Nos muestra si está visible o hidden
+})
+-----------------------
+___Notifications___.(Con localhost)
+requestPermission():Es un método de Notification, que lo que hace es pedir permiso para enviar notificaciones
+Ejemplo: 
+if (!("Notification" in window)){//Verificando si no está  disponible en window
+    console.log("En este navegador no están disponibles las  notificaciones");
+}
+
+Notification.requestPermission()
+----------------
+Notification.permission: Es el valor de requestPermission(si está permitido denegado o default)
+Ejemplo:  
+"use strict";
+
+if (!("Notification" in window)){//Verificando si no está  disponible en window
+    console.log("En este navegador no están disponibles las  notificaciones");
+}
+
+Notification.requestPermission(()=>{
+    if (Notification.permission == "granted") {-->"granted" Es cuando permites las notis
+        new Notification("Primera notificacion papu") -->Envia una noti
+    }
+}) 
+-----------------
+___Web Workers___. (Es (un archivo) una forma detrabajar en segundo plano)
+Worker():Es un archivo que se llama desde una pagina que se ejecuta en segundo plano
+Ejemplo:  
+const worker = new Worker("Worker.js")--> Se coloca un archivo
+-----------------
+postMessage(): Envía mensajes desde elscript al web workers(y del worker al script)  
+Ejemplo:  
+"use strict";
+const worker = new Worker("Worker.js")
+document.querySelector(".button").addEventListener("click",()=>ejecutarBucle())
+
+const  ejecutarBucle = ()=>{
+    worker.postMessage(true)//-->Enviamos el mensaje(Un objeto)
+}
+////////////////////
+Del lado del workers:  
+const ejecutarBucle  =()=>{
+    while(true){
+        console.log(1)
+    }
+}
+addEventListener("message",ejecutarBucle)//--> Si se recibe un mensaje se ejecuta
+
+"use strict";
+
+const worker = new Worker("Worker.js")
+document.querySelector(".button").addEventListener("click",()=>ejecutarBucle())
+
+Ejemplo#2:   Enviando y  devolviendo el mensaje
+
+worker.addEventListener("message",e=>{
+    console.log(e.data) //-->e.data Nos devuelve el objeto o string(el valor)
+})
+const  ejecutarBucle = ()=>{
+    worker.postMessage("qlq manao todo ben?")//-->Enviamos el mensaje
+}
+--------------------------
+Política de origen cruzado(Same origin): 
+Para que funcione todo, se tiene que llamar desde el mismo lugar(url)
+No podemos llamar a otros archivos o trabajar con peticiones http sin que sea del mismo origen
+Síntaxis de url
+Protocolo/host/puerto
+http://localhost:80}
+Ejemplo:  
+"use strict";
+
+const worker = new Worker("https://localhost:82/CODIGO/worker.js")-->Estamos ejecutando el workers desde este puerto
+
+document.querySelector(".button").addEventListener("click",()=>ejecutarBucle())
+
+worker.addEventListener("message",e=>{
+    console.log(e.data) 
+    worker.terminate()
+})
+const  ejecutarBucle = ()=>{
+    worker.postMessage("qlq manao todo ben?")//-->Enviamos el mensaje
+}
+
+options Buscar en google
+--------------------------
+___Objeto navigator___
+navigator.appCodeName: Devuelve el navegador (casi siempre).
+Ejemplo: 
+console.log(navigator.appCodeName)
+-----------
+navigator.appName: Nos devuelve el nombre oficial del navegador(casi siempre)
+Ejemplo:
+console.log(navigator.appName)
+------------
+navigator.appVersion: Nos devuelve la versión del navegador + info del navegador
+Ejemplo: 
+console.log(navigator.appVersion)
+-------------
+navigator.connection: Nos devuelvesi el navegador está conectado 
+Ejemplo: 
+console.log(navigator.connection)
+----------------
+navigator.hardwareConcurrency: Nos devuelve la cantidad de núcleos del procesador lógico que hay disponible
+Ejemplo:
+console.log(navigator.hardwareConcurrency)
+-----------------
+navigator.language: Nos devuelve el lengguaje en que está el navegador
+Ejemplo: 
+console.log(navigator.language)
+----------------
+navigator.languages: Nos devuelve un arreglo(array) con los idiomas que están por defecto en el naveador 
+Ejemplo: 
+console.log(navigator.languages)
+------------------
+navigator.mimeTypes: Tiene que ver con losheader(Está obsoleto)
+Ejemplo: 
+console.log(navigator.mimeTypes)
+------------------
+navigator.onLine: Nos devuelve si está en online
+Ejemplo: 
+console.log(navigator.onLine)
+-----------------
+navigator.userAgent: Nos devuelve información de el navegador(casi siempre)
+Ejemplo: 
+console.log(navigator.userAgent)
+--------------------
+navigator.cookieEnabled: Nos devuelve si tenemos las cookies activadas
+Ejemplo:
+console.log(navigator.cookieEnabled)
+-----------------------
+navigator.permissions: Nos permite acceder a cada uno de los permisos del navegador (micrófono,notis,etc)
+Ejemplo: 
+console.log(navigator.permissions)
+-------------------------
+navigator.platform: Nos devuelve la plataforma
+Ejemplo: (obsoleto)
+console.log(navigator.platform)
+---------------------
+navigator.plugins: Nos devuelve los plugins que están instalados en el navegador
+Ejemplo: (obsoleto)
+console.log(navigator.plugins)-->Nos devuelve un array
+------------------
+navigator.products: Nos devuelve gecko
+Ejemplo: (obsoleto)
+console.log(navigator.product)
+----------------
+Métodos: 
+navigator.getUserMedia(): Nos permite acceder al audio y al video de nuestro dispositivo
+navigator.registerContentHandler(): Permite a los web sites registrarse como posibles controladores de un tipo de MIME determinado
+navigator.registerProcolHandler(): Permite a los web sites registrarse como posibles controladores de un protocolo determinado
+navigator.requestMediaKeySystemAcces():Devuelve un objeto Promise para un objeto MediKeySystemAcces.
+navigator.sendBeacon():Usado para transferir, de forma asíncrona, conjuntos pequeños de datos HTTP del agente usuario al servidor.
+navigator.javaEnabled(): Devuelve un valor Boolean (true o false)que indica si el navegador tiene o no habilitado Java.
+navigator.vibrate(): Causa vibraci+on en eldispositivo que lo soporta. No hace nada si el soportepara vibración no está disponible.
+-----------------
+___Memoization___. Usar cuando sabemos que se van a repetir algunos datos que consuman muchos recursos 
+"use strict";
+
+let cache = [];
+const memoizer = func =>{
+    return e =>{// --> e = memo 
+        const index = e.toString();
+        if(cache[index] == undefined) {
+            cache[index] = func(e)
+        }
+        return cache[index];
+    }
+}
+
+const hacerAlgo = num=>{
+    const a = 20;
+    const b = 12;
+    let c = 0;  
+    for (let j = num - 1; j >= 0; j--) {
+        for(let k = j -1; k >=  0; k--){
+            c += a*b;  
+        }
+        
+    }
+    return c;
+}
+
+const date = new Date();
+hacerAlgo(60000);
+console.log(new Date() - date)
+
+const date2 = new Date();
+hacerAlgo(60000);
+console.log(new Date() - date2)
+
+const date3 = new Date();
+hacerAlgo(60000);
+console.log(new Date() - date3)
+
+const date4 = new Date();
+hacerAlgo(60000);
+console.log(new Date() - date3)
+
+console.log("Función con memoizer: ");
+const memo = memoizer(hacerAlgo)
+
+const date5 = new Date();
+memo(60000);
+console.log(new Date() - date5)
+
+const date6 = new Date();
+memo(60000);
+console.log(new Date() - date6)
+
+const date7 = new Date();
+memo(60000);
+console.log(new Date() - date7)
+
+const date8 = new Date();
+memo(60000);
+console.log(new Date() - date8)
+------------------------
+___caché___.DEVUELVE PROMESAS
+Memoria de corto plazo  que lo que hace es almacenar información  para que no se solicite muchas veces
+---------
+caches.open(): Abrimos caché se coloca el nombre del almacenamiento(creamos un espacio de almacenamiento en caché)
+-----------
+add(request): Toma una URL, la recupera y agrega  el objeto de respuesta resultante a la caché dada. Esto es funcionalmente equivalente a llamar fetch() y luego usar put() para agregar a la caché.
+Ejemplo: 
+caches.open("archivos-estáticos").then((cache=>{
+    cache.add("index.HTML")// --> almacena en cache el archivo(agrega recursos al caché por dalto)
+}))
+-----------------
+addAll(): Agrega todos los elementos 
+Ejemplo: 
+caches.open("archivos-estáticos-2").then((cache=>{
+    cache.addAll(["index.html","style.css","codigo.js"])--> Los elementos se colocan dentro de un array
+}))
+---------------
+match(): (nos devuelve el recurso del caché)Devuelve un promise que se resuelve con la respuesta asociada con la primera solicitud coincidente en el objeto almacenado.
+Ejemplo: 
+caches.open("archivos-estáticos-2").then((cache=>{
+    cache.match("index.html").then(res =>{
+        console.log(res);
+    })
+}))
+--------------
+matchAll: Nos devuelve todos los recursos con el mismo nombre que estén en el mismo archivo(almacenamiento) caché
+Ejemplo: 
+caches.open("archivos-estáticos-2").then((cache=>{
+    cache.matchAll("index.html").then(res =>{
+        console.log(res);
+    })
+}))
+------------------
+put():(agrega un recurso al caché) (usar mejor add),(puth se usa más que todo para modificar),Toma tanto una solicitud como su respuesta y la agrega a la caché dada.
+Ejemplo: 
+caches.open("archivos-estáticos").then((cache=>{
+    fetch("index.html").then(res=>{
+    cache.put("index.html",res)
+   })
+}))
+delete():Elimina el recurso
+Ejemplo: 
+
+caches.open("archivos-estáticos").then((cache=>{
+    cache.delete("index.html");
+}))
+----------------
+keys():(nos devuelve los keys con la info) Nos devuelve una promesa que nos da una matriz de keys de los objetos almacenados
+Ejemplo: 
+
+caches.open("archivos-estáticos").then((cache=>{
+    cache.addAll(["index.html","style.css","información.txt","worker.js"])
+    cache.keys().then(res=>{
+        console.log(res)
+    })
+}))
+------------------
+___Service workers___. buscar service worker lifecycle
+Para verificar que exista: 
+console.log(navigator.serviceWorker)
+----------------
+reister():Se usa para registrar el service worker
+Ejemplo: 
+
+console.log(navigator.serviceWorker)
+
+navigator.serviceWorker.register("sw.js")
+----------------
+self: Es lo mismo que this(se usa en un service worker)
+Ejemplo: 
+self.addEventListener("install",e=>{-->(instala el service worker) El evento install es el primer evento que obtiene un service worker y solo sucede una vez.
+    console.log("instalando service worker")
+})
+self.addEventListener("activate",()=>{--> Verificando que está activo
+    console.log("activado");
+})
+------------
+"fetch": Es un evento que lo que hace es verificar que se está enviando
+Ejemplo: 
+
+self.addEventListener("fetch",()=>{
+    console.log("interceptando petición")--> cada vez que seactualice la pagina se va a mostrar
+})
+-------------
+ready:Nos devuelve si ya cargó el worker se usa antes para enviar mensajes
+Ejemplo: 
+setTimeout(()=>{
+    navigator.serviceWorker.postMessage("Hola bro como estás?");-->Enviando un mensaje
+},3000)
+
+/*************************
+Navegador:
+
+navigator.serviceWorker.addEventListener("message",(e)=>{
+    console.log("Se ha recibido un mensaje del service worker");
+    console.log(e.data);
+})
+
+Serviceworker:
+self.addEventListener("message",(e)=>{
+    console.log("Se ha registrado un mensaje: ")
+    console.log(e.data);
+    e.source.postMessage("todo ben bro")
+})
+----------------------
+Hacer que la pagina se vea sin internet
+*********************
+En el worker:
+
+let version = "version 3";
+
+self.addEventListener("install",e=>{
+    console.log("instalando service worker")
+    caches.open(version).then(cache=>{
+        cache.add("index.html").then(res=>{
+            console.log("informacion cacheada");
+        }).catch(e=>{
+            console.log(e);
+        })
+    })
+})
+
+self.addEventListener("activate",()=>{
+    caches.keys().then(key=>{
+        return Promise.all(
+            key.map(cache=>{
+                if (cache!==version){
+                    console.log("caché antiguo eliminado");
+                    return caches.delete(cache);
+                }
+            })
+        )
+    })
+})
+
+self.addEventListener("fetch",e=>{
+    e.respondWith(async function h(){
+        const respuestaEnCache = await caches.match(e.request);
+        if(respuestaEnCache) return respuestaEnCache;
+        return e.request;
+    });
+})
+---------------------
+Terminar de ver el video....
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
