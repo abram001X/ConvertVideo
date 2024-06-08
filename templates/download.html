@@ -1,20 +1,39 @@
-{% extends 'index.html' %}
-{%block body%} 
-<h1>Convertidor de Videos </h1>
-<form  method="post" >
-    <section class="contenedor_mp4">
-        <label for="video">Convertir url a vídeo</label>
-    <input  name="video"  id="video" type="text" >
-    <button class="v_mp4-boton">Descargar</button>
-    <img src="" alt="">
-    {%if dato%}
-    <p>{{dato.title}}</p>
-    {%endif%}
-    </section>
-    <section class="contenedor_mp3" id="contenedor">
-        <label for="audio">Convertir url a audio</label>
-        <input type="text" name="audio" id="audio">
-        <button>Descargar</button>
-    </section>  
+{% extends 'index.html' %} {%block body%}
+<h1>Convertidor de Videos</h1>
+{%if dato_mp4 %}
+<!--Descargar a mp4-->
+<section class="convert">
+  <p>Descargar url a vídeo</p>
+  <p>{{dato_mp4.title}}</p>
+  <img src="{{dato_mp4.url}}" alt="" />
+  <p>Visiualizaciones : {{dato_mp4.views}} M</p>
+  <p>Duración : {{dato_mp4.duration}} s</p>
+  <button>Descargar</button>
+</section>
+{%elif dato_mp3%}
+<!--Descargar audio-->
+<section class="convert">
+  <p>Convertir url a audio</p>
+  <p>{{dato_mp3.title}}</p>
+  <img src="{{dato_mp3.url}}" alt="" />
+  <p>Visiualizaciones : {{dato_mp3.views}} M</p>
+  <p>Duración : {{dato_mp3.duration}} s</p>
+  <button>Descargar</button>
+</section>
+
+{%else%}
+<form method="post">
+  <section class="contenedor_mp4">
+    <!--Convertir mp4-->
+    <label for="video">Convertir url a vídeo</label>
+    <input name="video" id="video" type="text" />
+    <button>Convertir Link</button>
+  </section>
+  <!--Convertir mp3-->
+  <section class="contenedor_mp3" id="contenedor">
+    <label for="audio">Convertir url a Audio</label>
+    <input name="audio" id="audio" type="text" />
+    <button>Convertir Link</button>
+  </section>
 </form>
-{%endblock%}
+{% endif %} {% endblock %}
