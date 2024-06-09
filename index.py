@@ -2,65 +2,54 @@ from flask import *
 from pytube import YouTube
 from moviepy.editor import *
 import os
+import json
 import data as data 
+
 #Iniciar Server
 app = Flask(__name__)
 
-@app.route('/json', methods=['GET','POST'])
+@app.route('/json')
 def api_route():
-   return send_file('api.json')
+   with open('api.json') as json_file:
+      data_json = json.load(json_file)
+   link = data_json['file']
+   return send_file(link, as_attachment=True)
+
+@app.route('/json_mp3')
+def download():
+   with open('api.json') as json_file:
+      data_json = json.load(json_file)
+   link = data_json['file_mp3']
+   return send_file(link, as_attachment=True)
 
 @app.route('/download', methods=["GET","POST"])
 def home():
-   if request.method == "POST":
-         if request.form['audio']:
-            link_mp3 = request.form['audio']
-            convert_link = convert_audio(link_mp3)
-            return convert_link
-         if request.form['video'] :
-            link_mp4 = request.form['video']
-            convert_link = convert_video(link_mp4)
-            return convert_link
+   if request.method == "POST" :
+      if request.form['link']: 
+         link = request.form['link']
+         date = convert_audio(link)
+         data.create_api(date)
+         return render_template('download.html', dato = date)      
    return render_template('download.html')
 
-# Descargar en formato mp3
-def download_audio(link_audio):
-      yt = YouTube(link_audio)
-      v = yt.streams.get_audio_only().download()
-      v_mp3 = v.replace('mp4','mp3')
-      audio = AudioFileClip(v)
-      audio.write_audiofile(audio.filename.replace('mp4','mp3'))
-      #convertir video antes que el usuario lo descargue
-      #os.remove(v)
-      #return send_file(v_mp3,as_attachment=True)
-   
-#Descargar en formato mp4
-def download_video(link_video): 
-   yt = YouTube(link_video)
-   v = yt.streams.first().download()
-   return send_file(v, as_attachment=True)   
 
-#convertir video
-def convert_video(video):
-   yt = YouTube(video)
-   date = {
-      'title' : f"Titulo : {yt.title}", 
-      'url' : yt.thumbnail_url,
-      'views': yt.views,
-      'duration' : yt.length
-      }
-   return render_template('download.html', dato_mp4 = date)  
-            
-#convertir audio
+#convertir Descargar audio
 def convert_audio(audio):
    yt = YouTube(audio)
+   v = yt.streams.get_audio_only().download()
+   v_mp3 = v.replace('mp4', 'mp3')
+   mp3 = AudioFileClip(v)
+   mp3.write_audiofile(mp3.filename.replace('mp4','mp3'))
    date = {
-      'title' : yt.title, 
-      'url' : yt.thumbnail_url,
-      'views': yt.views,
-      'duration' : yt.length
-      }
-   return render_template('download.html', dato_mp3 = date)  
+         'title' : yt.title, 
+         'url' : yt.thumbnail_url,
+         'views': yt.views,
+         'duration' : yt.length,
+         'file' : v,
+         'file_mp3' : v_mp3.replace('mp4','mp3')
+         }
+   return date
+
 if __name__ == '__main__':
     app.run()
 

@@ -9,6 +9,9 @@ body{
 h1{
     text-align: center;
 }
+.none{
+    display: none;
+}
 img{
     width: 200px;
     height: 150px;
@@ -75,6 +78,4 @@ button{
 button:hover{
     cursor: pointer;
 }
-button:focus{
-    background-color: #444;
-}
+
