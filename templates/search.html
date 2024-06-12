@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="https://img.freepik.com/premium-vector/crescent-moon-music-logo-template-design_316488-630.jpg">
+    <title>ConvertMoon</title>
+</head>
+<body>
+    <menu class="menu">
+        <div>
+            <a href="/" class="title-menu">ConvertMoon<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M501-320q38 0 74.5-16t63.5-48q7-8 3-18t-14-12q-38-6-72-28.5T501-502q-20-35-23.5-75.5T488-656q4-10-2.5-18t-17.5-6q-69 13-109 65t-40 115q0 75 53.5 127.5T501-320ZM480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z"/></svg></a>
+        </div>
+        <div class="child-menu">
+            <a href="/" class="Inicio">Inicio  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></a>
+            <a href="/search">Buscar video <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></a>
+        </div>
+     </menu>
+    <section class="contenedor_padre">
+    {%if dato%}
+    <form action="" method="post">
+        <h1 class="title_1">Convertidor de Videos <svg class="icon_title" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed"><path d="M450-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h170v60H280q-58.33 0-99.17 40.76-40.83 40.77-40.83 99Q140-422 180.83-381q40.84 41 99.17 41h170v60ZM325-450v-60h310v60H325Zm185 170v-60h170q58.33 0 99.17-40.76 40.83-40.77 40.83-99Q820-538 779.17-579q-40.84-41-99.17-41H510v-60h170q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H510Z"/></svg></h1>
+        <section class="contenedor_mp3">
+            <label for="search" id="search" name="search">Busca un vídeo para descargar</label>
+            <input type="text" name="search" id="search">
+            <button>Buscar</button>
+    </form>
+        </section>
+            <section class="cont_img_link">
+            {%for result in dato%}
+            <section class="download_search" href="/search/{{result}}">
+                <div class="cont_img">
+                    <img src="{{result.thumbnail_url}}" class="img" />
+                  </div>
+                  <div class="cont_data" style="padding: 5px 0;">
+                    <div class="cont_data-child">
+                      <p>{{result.title}}</p>
+                      <b>{{result.author}}</b><br/>
+                      <b>{{result.views}} M de visualizaciones</b><br />
+                      <b>{{result.publish_date}}</b>
+                    </div>
+                  </div>
+                  <div class="button_download">
+                    <p for="">.MP4</p>
+                    <a href="/apjsdabram/mp4,{{result.video_id}}"><button>Descargar</button></a>
+                    <br>
+                    <br>
+                    <p for="">.MP3</p>
+                    <a href="/apjsdabram/mp3,{{result.video_id}}"><button>Descargar</button></a>
+                    <br>
+                  </div>
+            </section> 
+              {%endfor%}
+        </section>
+        <footer class="footer" >
+            <p>© 2024 AbrahamAlfonzo</p>
+            <p>abrahamalfonzo11@gmail.com</p>
+            <p>© 2024 ConvertMoon -Convertidor de uso personal</p>
+        </footer>
+    {%else%}
+    <form action="" method="post">
+        <h1 class="title_1">Convertidor de Videos <svg class="icon_title" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed"><path d="M450-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h170v60H280q-58.33 0-99.17 40.76-40.83 40.77-40.83 99Q140-422 180.83-381q40.84 41 99.17 41h170v60ZM325-450v-60h310v60H325Zm185 170v-60h170q58.33 0 99.17-40.76 40.83-40.77 40.83-99Q820-538 779.17-579q-40.84-41-99.17-41H510v-60h170q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H510Z"/></svg></h1>
+        <section class="contenedor_mp3">
+            <label for="search" id="search" name="search">Busca un vídeo para descargar</label>
+            <input type="text" name="search" id="search">
+            <button>buscar</button>
+        </section>
+    </form>
+    <footer class="footer" style="transform: translateY(350px);">
+        <p>© 2024 AbrahamAlfonzo</p>
+        <p>abrahamalfonzo11@gmail.com</p>
+        <p>© 2024 ConvertMoon -Convertidor de uso personal</p>
+    </footer>
+    {%endif%}
+    </section>
+   
+</body>
+</html>
