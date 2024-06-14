@@ -3,7 +3,7 @@ body{
     background-color: #111;
     color: #fff;
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 500;
 }
 .contenedor_search{
     display: flex;
@@ -99,12 +99,15 @@ a{
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    border: 1px solid #fff;
 }
 .download_search{
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 5px 10px; 
+    border: 1px solid #0f0;
+    max-width: 750px;
 }
 .button_download{
     padding: 10px;
@@ -130,7 +133,7 @@ a{
     background-color: #222;
 }
 input{
-    width: 700px;
+    width: 70%;
     border: none;
     border-bottom: 2px solid #5080ff;
     outline: none;
@@ -145,16 +148,18 @@ input{
 }
 .convert{
     margin-top: 20px;
-    width: 700px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     height: 400px;
+    border: 1px solid #0f0;
 }
 .cont_download_convert{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid #fff;
 }
 .cont_data, .cont_format{
     padding:30px;
@@ -162,6 +167,8 @@ input{
     justify-content: center;
     align-items: center;
     height: 50%;
+    border: 1px solid #f00;
+    width: 100%;
 }
 .cont_data-child{
     height: 170px;
@@ -197,4 +204,60 @@ button:hover{
 }
 .cont_format div p{
     margin-bottom: 10px;
+    text-align: center;
+}
+
+@media screen and (max-width: 830px){
+    .download_search{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .contenedor_mp3{
+        width: 100%;
+    }
+    input{
+        width: 100%;
+    }
+    button{
+        width: 100px;
+    }
+    .menu{
+        font-size: 15px;
+    }
+    .child-menu{
+        width: 200px;
+        justify-content: space-between;
+        padding: 0;
+    }
+    .footer p{
+        font-size: 10px;
+        text-align: center;
+    }
+    .cont_download_convert{
+        width: 100%;
+    }
+    .cont_data{
+        padding: 20px;
+    }
+    .cont_data-child{
+        height: 150px;
+    }
+    .cont_img{
+        height: 150px;
+    }
+    .cont_data-child p{
+        font-size: 10px;
+    }
+    .cont_data-child b{
+        font-size:12px;
+    }
+    .fecha_b{
+        display: none;
+    }
+    .button_download button{
+        font-size: 12px;
+        width: 70px;
+    }
 }

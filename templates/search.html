@@ -38,14 +38,12 @@
                 <div class="cont_img">
                     <img src="{{result.thumbnail_url}}" class="img" />
                   </div>
-                  <div class="cont_data" style="padding: 5px 0;">
                     <div class="cont_data-child">
                       <p>{{result.title}}</p>
                       <b>{{result.author}}</b><br/>
                       <b>{{result.views}} M de visualizaciones</b><br />
-                      <b>{{result.publish_date}}</b>
+                      <b class="fecha_b">{{result.publish_date}}</b>
                     </div>
-                  </div>
                   <div class="button_download">
                     <p for="">.MP4</p>
                     <a href="/apjsdabram/mp4,{{result.video_id}}"><button>Descargar</button></a>
@@ -69,7 +67,7 @@
         <section class="contenedor_mp3">
             <label for="search" id="search" name="search">Busca un vídeo para descargar</label>
             <input type="text" name="search" id="search">
-            <button>buscar</button>
+            <button>Buscar</button>
         </section>
     </form>
     <footer class="footer" style="transform: translateY(350px);">
