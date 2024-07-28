@@ -119,7 +119,7 @@ a{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    
+    height: 50px;
     transform: translateY(25px);
 }
 .footer p{
@@ -154,8 +154,9 @@ input{
 .input_search::placeholder{
     color: #777;
 }
-input::placeholder{
-    color: #f55;
+
+.input_regex::placeholder{
+    color: #f00;
     font-size: 15px;
 }
 .convert_button{
@@ -234,8 +235,7 @@ button:hover{
     margin-top: 10px;
     text-decoration:underline ;
 }
-.a_notfound svg{
-}
+
 @media screen and (max-width: 830px){
     .download_search{
         width: 100%;

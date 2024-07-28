@@ -2,8 +2,6 @@ from flask import *
 from pytubefix import YouTube,Search
 from pytubefix.cli import on_progress
 from moviepy.editor import *
-import os
-
 #Iniciar Server
 app = Flask(__name__)
 
@@ -20,12 +18,20 @@ def  search_url(url):
 def search():
    if request.method == 'POST':
       res = request.form['search']
+      res = res.replace(" ","")
+      if res == "":
+         return render_template("search.html")
       result = Search(res)
+      print("erorr", result)
       obj = result.results
       ob = []  
-      for i in range(0,5):
-         ob.append(obj[i])
-      return render_template('search.html', dato = ob)
+      if len(obj) > 5:
+         for i in range(0,5):
+            ob.append(obj[i])
+      else :
+         for i in range(0,len(obj)):
+            ob.append(obj[i])
+      return render_template('search.html', dato = ob, cadena = res)
    
    return render_template('search.html')
 
@@ -40,11 +46,11 @@ def home():
             date = convert_url(link)
             return render_template('download.html', dato = date)
          else :
-            return render_template("download.html", regex = "Escribe un link válido.")  
+            return render_template("download.html", regex = "Escribe un link válido")  
    return render_template('download.html')
 
 @app .errorhandler(404)
-def page_error (e):
+def page_error(e):
    return render_template('page_error.html')
 
 #Convert Url
@@ -72,6 +78,7 @@ def download_audio_video(format,url):
    if format == 'mp3':
       v = yt.streams.get_audio_only().download(mp3=True)
       return v
+
 
 #Descargar audio_video usando Search
 #def download_mp4_mp3(format,url):
