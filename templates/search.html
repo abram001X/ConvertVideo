@@ -19,7 +19,7 @@
         </div>
         <div class="child-menu">
             <a href="/" class="Inicio">Inicio  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg></a>
-            <a href="/search">Buscar video <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></a>
+            <a href="/search">Buscar video  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></a>
         </div>
      </menu>
     <section class="contenedor_padre">
@@ -27,9 +27,9 @@
     <form action="" method="post">
         <h1 class="title_1">Convertidor de Videos <svg class="icon_title" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed"><path d="M450-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h170v60H280q-58.33 0-99.17 40.76-40.83 40.77-40.83 99Q140-422 180.83-381q40.84 41 99.17 41h170v60ZM325-450v-60h310v60H325Zm185 170v-60h170q58.33 0 99.17-40.76 40.83-40.77 40.83-99Q820-538 779.17-579q-40.84-41-99.17-41H510v-60h170q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H510Z"/></svg></h1>
         <section class="contenedor_mp3">
-            <label for="search" id="search" name="search">Busca un vídeo para descargar</label>
+            <label for="search" id="search" name="search" >Busca un vídeo para descargar</label>
             <input type="text" name="search" id="search">
-            <button>Buscar</button>
+            <button class="buscar-boton">Buscar</button>
     </form>
         </section>
             <section class="cont_img_link">
@@ -41,7 +41,7 @@
                     <div class="cont_data-child">
                       <p>{{result.title}}</p>
                       <b>{{result.author}}</b><br/>
-                      <b>{{result.views}} M de visualizaciones</b><br />
+                      <b>{{result.views}}visualizaciones</b><br />
                       <b class="fecha_b">{{result.publish_date}}</b>
                     </div>
                   <div class="button_download">
@@ -52,9 +52,9 @@
                     <p for="">.MP3</p>
                     <a href="/apjsdabram/mp3,{{result.video_id}}"><button>Descargar</button></a>
                     <br>
-                  </div>
+                </div>
             </section> 
-              {%endfor%}
+            {%endfor%}
         </section>
         <footer class="footer" >
             <p>© 2024 AbrahamAlfonzo</p>
@@ -66,17 +66,16 @@
         <h1 class="title_1">Convertidor de Videos <svg class="icon_title" xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed"><path d="M450-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h170v60H280q-58.33 0-99.17 40.76-40.83 40.77-40.83 99Q140-422 180.83-381q40.84 41 99.17 41h170v60ZM325-450v-60h310v60H325Zm185 170v-60h170q58.33 0 99.17-40.76 40.83-40.77 40.83-99Q820-538 779.17-579q-40.84-41-99.17-41H510v-60h170q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H510Z"/></svg></h1>
         <section class="contenedor_mp3">
             <label for="search" id="search" name="search">Busca un vídeo para descargar</label>
-            <input type="text" name="search" id="search">
-            <button>Buscar</button>
+            <input type="text" name="search" id="search" class="input_search" placeholder="Buscar">
+            <button class="buscar-boton">Buscar</button>
         </section>
     </form>
     <footer class="footer" style="transform: translateY(350px);">
         <p>© 2024 AbrahamAlfonzo</p>
         <p>abrahamalfonzo11@gmail.com</p>
-        <p>© 2024 ConvertMoon -Convertidor de uso personal</p>
+        <p>© 2024 ConvertMoon</p>
     </footer>
     {%endif%}
     </section>
-   
 </body>
 </html>

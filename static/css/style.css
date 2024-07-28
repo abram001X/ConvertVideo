@@ -92,6 +92,10 @@ a{
     border-top: 1px solid #5080ff;
     margin-top: 20px;
 }
+.contenedor_mp3 label{
+    color: #ff0;
+}
+
 .cont_img_link{
     display: flex;
     flex-direction: column;
@@ -99,14 +103,12 @@ a{
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    border: 1px solid #fff;
 }
 .download_search{
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 5px 10px; 
-    border: 1px solid #0f0;
     max-width: 750px;
 }
 .button_download{
@@ -143,6 +145,19 @@ input{
     border-radius: 5px;
     padding: 10px;
 }
+.input_search{
+    width: 50%;
+}
+.buscar-boton{
+    width: 120px;
+}
+.input_search::placeholder{
+    color: #777;
+}
+input::placeholder{
+    color: #f55;
+    font-size: 15px;
+}
 .convert_button{
     width: 170px;
 }
@@ -152,14 +167,12 @@ input{
     display: flex;
     flex-direction: column;
     height: 400px;
-    border: 1px solid #0f0;
 }
 .cont_download_convert{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #fff;
 }
 .cont_data, .cont_format{
     padding:30px;
@@ -167,7 +180,6 @@ input{
     justify-content: center;
     align-items: center;
     height: 50%;
-    border: 1px solid #f00;
     width: 100%;
 }
 .cont_data-child{
@@ -207,6 +219,23 @@ button:hover{
     text-align: center;
 }
 
+/*Not found*/
+.cont_notfound{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    background-repeat: no-repeat;
+}
+.a_notfound{
+    margin-top: 10px;
+    text-decoration:underline ;
+}
+.a_notfound svg{
+}
 @media screen and (max-width: 830px){
     .download_search{
         width: 100%;

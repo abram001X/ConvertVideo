@@ -1,8 +1,8 @@
 from flask import *
-from pytube import YouTube,Search
+from pytubefix import YouTube,Search
+from pytubefix.cli import on_progress
 from moviepy.editor import *
 import os
-import json
 
 #Iniciar Server
 app = Flask(__name__)
@@ -24,7 +24,7 @@ def search():
       obj = result.results
       ob = []  
       for i in range(0,5):
-        ob.append(obj[i])
+         ob.append(obj[i])
       return render_template('search.html', dato = ob)
    
    return render_template('search.html')
@@ -35,17 +35,23 @@ def home():
    if request.method == "POST":
       if request.form['link']: 
          link = request.form['link']
-         date = convert_url(link)
-         return render_template('download.html', dato = date)  
-     
+         caracters = link.find("https://www.youtube.com")
+         if caracters == 0 :
+            date = convert_url(link)
+            return render_template('download.html', dato = date)
+         else :
+            return render_template("download.html", regex = "Escribe un link válido.")  
    return render_template('download.html')
 
+@app .errorhandler(404)
+def page_error (e):
+   return render_template('page_error.html')
 
 #Convert Url
 def convert_url(link):
-    yt = YouTube(link)
-    date = {
-         'title' : yt.title, 
+   yt = YouTube(link)
+   date = {
+         'title' : yt.title,  
          'url' : yt.thumbnail_url,
          'views': yt.views,
          'autor': yt.author,
@@ -55,26 +61,21 @@ def convert_url(link):
          'fecha' : str(yt.publish_date).replace('00:00:00',''),
          'video_id' : yt.video_id
          }
-    return date
+   return date
 
 #Descargar audio_video usando YouTube()
 def download_audio_video(format,url):
-   yt = YouTube(url)
+   yt = YouTube(url, on_progress_callback = on_progress)
    if format == 'mp4':
-      v = yt.streams.get_audio_only().download()
-      v_mp3 = v.replace('mp4', 'mp3')
+      v = yt.streams.get_highest_resolution().download()
       return v
    if format == 'mp3':
-      v = yt.streams.get_audio_only().download()
-      v_mp3 = v.replace('mp4', 'mp3')
-      mp3 = AudioFileClip(v)
-      mp3.write_audiofile(mp3.filename.replace('mp4','mp3'))
-      os.remove(v)
-      return v_mp3
+      v = yt.streams.get_audio_only().download(mp3=True)
+      return v
 
 #Descargar audio_video usando Search
 #def download_mp4_mp3(format,url):
    
 if __name__ == '__main__':
-    app.run(port=5000)
+   app.run(port=5000)
    

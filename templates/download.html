@@ -24,6 +24,71 @@
       >
       <input name="link" id="link" type="text" value="{{dato.link}}" />
       <button class="convert_button">
+        Convertir Link 
+      </button>
+    </section>
+  </form>
+  <!--Descargar a mp4-->
+  <section class="cont_download_convert">
+    <section class="convert">
+      <div class="cont_data">
+        <div class="cont_img">
+          <img src="{{dato.url}}" class="img" />
+        </div>
+        <b class="dr">{{dato.duration}}</b>
+        <div class="cont_data-child">
+          <p>{{dato.title}}</p>
+          <b>{{dato.autor}}</b><br />
+          <b>{{dato.views}} visualizaciones</b>
+        </div>
+      </div>
+      <div class="cont_format">
+        <!--Descargar video-->
+        <div class="mp4">
+          <a href="/apjsdabram/mp4,{{dato.video_id}}"
+            ><button class="button_svg" >Descargar video</button></a
+          >
+        </div>
+        <!--Descargar audio-->
+        <div>
+          <a href="/apjsdabram/mp3,{{dato.video_id}}" 
+            ><button class="button_svg">Descargar audio</button></a
+          >
+        </div>
+      </div>
+    </section>
+    
+  </section>
+  <footer class="footer" >
+    <p>© 2024 AbrahamAlfonzo</p>
+    <p>abrahamalfonzo11@gmail.com</p>
+    <p>© 2024 ConvertMoon -Convertidor de uso personal</p>
+  </footer>
+  {%elif regex%}
+  
+  <form method="post">
+    <h1 class="title_1">
+      Convertidor de Videos
+      <svg
+        class="icon_title"
+        xmlns="http://www.w3.org/2000/svg"
+        height="48px"
+        viewBox="0 -960 960 960"
+        width="48px"
+        fill="#e8eaed"
+      >
+        <path
+          d="M450-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h170v60H280q-58.33 0-99.17 40.76-40.83 40.77-40.83 99Q140-422 180.83-381q40.84 41 99.17 41h170v60ZM325-450v-60h310v60H325Zm185 170v-60h170q58.33 0 99.17-40.76 40.83-40.77 40.83-99Q820-538 779.17-579q-40.84-41-99.17-41H510v-60h170q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H510Z"
+        />
+      </svg>
+    </h1>
+    <section class="contenedor_mp3" id="contenedor">
+      <label for="link"
+        >Ingresa una Url de Youtube para convertirlo en formato mp4 o
+        mp3</label
+      >
+      <input name="link" id="link" type="text" placeholder="{{regex}}"/>
+      <button class="convert_button">
         Convertir Link
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,69 +104,10 @@
       </button>
     </section>
   </form>
-  <!--Descargar a mp4-->
-  <section class="cont_download_convert">
-    <section class="convert">
-      <div class="cont_data">
-        <div class="cont_img">
-          <img src="{{dato.url}}" class="img" />
-        </div>
-        <b class="dr">{{dato.duration}}</b>
-        <div class="cont_data-child">
-          <p>{{dato.title}}</p>
-          <b>{{dato.autor}}</b><br />
-          <b>{{dato.views}} M de visualizaciones</b><br />
-          <b>{{dato.fecha}}</b>
-        </div>
-      </div>
-      <div class="cont_format">
-        <!--Descargar video-->
-        <div class="mp4">
-          <p>
-            Descargar video
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#e8eaed"
-            >
-              <path
-                d="m380-300 280-180-280-180v360ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
-              />
-            </svg>
-          </p>
-          <a href="/apjsdabram/mp4,{{dato.video_id}}" download
-            ><button>Descargar .mp4</button></a
-          >
-        </div>
-        <!--Descargar audio-->
-        <div>
-          <p>
-            Descargar audio
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#e8eaed"
-            >
-              <path
-                d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z"
-              />
-            </svg>
-          </p>
-          <a href="/apjsdabram/mp3,{{dato.video_id}}" download
-            ><button>Descargar .mp3</button></a
-          >
-        </div>
-      </div>
-    </section>
-  </section>
-  <footer class="footer" >
+  <footer class="footer" style="transform: translateY(350px);">
     <p>© 2024 AbrahamAlfonzo</p>
     <p>abrahamalfonzo11@gmail.com</p>
-    <p>© 2024 ConvertMoon -Convertidor de uso personal</p>
+    <p>© 2024 ConvertMoon</p>
   </footer>
   {%else%}
   <!--Convertir link-->
@@ -147,7 +153,7 @@
   <footer class="footer" style="transform: translateY(350px);">
     <p>© 2024 AbrahamAlfonzo</p>
     <p>abrahamalfonzo11@gmail.com</p>
-    <p>© 2024 ConvertMoon -Convertidor de uso personal</p>
+    <p>© 2024 ConvertMoon</p>
   </footer>
   {% endif %}
 </section>
