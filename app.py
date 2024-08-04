@@ -42,7 +42,11 @@ def home():
          if request.form['link']: 
             link = request.form['link']
             caracters = link.find("https://www.youtu")
+            caracters2 = link.find("https://youtu")
             if caracters == 0 :
+               date = convert_url(link)
+               return render_template('download.html', dato = date)
+            elif caracters2 == 0 :
                date = convert_url(link)
                return render_template('download.html', dato = date)
             else :
