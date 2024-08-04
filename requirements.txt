@@ -2,4 +2,3 @@ flask
 python-dotenv
 gunicorn
 pytubefix
-pytubefix.cli
