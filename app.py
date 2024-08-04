@@ -1,7 +1,6 @@
 from flask import *
 from pytubefix import YouTube,Search
 from pytubefix.cli import on_progress
-from moviepy.editor import *
 from dotenv import load_dotenv
 
    #Iniciar Server
