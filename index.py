@@ -3,6 +3,7 @@ from pytubefix import YouTube,Search
 from pytubefix.cli import on_progress
 from moviepy.editor import *
 from dotenv import load_dotenv
+from index import app
 def crear_app():
    #Iniciar Server
    app = Flask(__name__)
@@ -82,9 +83,6 @@ def crear_app():
          return v
       
    return app
-
-   #Descargar audio_video usando Search
-   #def download_mp4_mp3(format,url):
 
 if __name__ == '__main__':
    app = crear_app()
