@@ -23,7 +23,6 @@ def search():
          if res == "":
             return render_template("search.html")
          result = Search(res)
-         print("erorr", result)
          obj = result.results
          ob = []  
          if len(obj) > 5:
@@ -42,7 +41,7 @@ def home():
       if request.method == "POST":
          if request.form['link']: 
             link = request.form['link']
-            caracters = link.find("https://www.youtube.com")
+            caracters = link.find("https://www.youtu")
             if caracters == 0 :
                date = convert_url(link)
                return render_template('download.html', dato = date)

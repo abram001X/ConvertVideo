@@ -1,6 +1,6 @@
 body{
     font-family: "Gothic A1", sans-serif;
-    background-color: #111;
+    background-image: linear-gradient(to right, #222222, #1b1b1b, #151515, #0c0c0c, #000000);
     color: #fff;
     font-size: 18px;
     font-weight: 500;
@@ -235,7 +235,13 @@ button:hover{
     margin-top: 10px;
     text-decoration:underline ;
 }
-
+.buscar{
+    text-decoration: underline;
+    color: #fff;
+}
+.buscar:Hover{
+    color: #ccc;
+}
 @media screen and (max-width: 830px){
     .download_search{
         width: 100%;
@@ -246,9 +252,7 @@ button:hover{
     .contenedor_mp3{
         width: 100%;
     }
-    input{
-        width: 100%;
-    }
+    
     button{
         width: 100px;
     }

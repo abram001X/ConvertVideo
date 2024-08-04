@@ -20,7 +20,7 @@
     <section class="contenedor_mp3" id="contenedor">
       <label for="link"
         >Ingresa una Url de Youtube para convertirlo en formato mp4 o
-        .mp3</label
+        mp3</label
       >
       <input name="link" id="link" type="text" value="{{dato.link}}" class="input_download" placeholder="URL"/>
       <button class="convert_button">
@@ -115,9 +115,13 @@
       </button>
     </section>
   </form>
+  <br><br>
+  <a href="/search" class="buscar"><p>Buscar video <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 6H6C4.89543 6 4 6.89543 4 8V18C4 19.1046 4.89543 20 6 20H16C17.1046 20 18 19.1046 18 18V14M14 4H20M20 4V10M20 4L10 14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+ </p></a> 
   {%else%}
   <!--Convertir link-->
-
   <form method="post">
     <h1 class="title_1">
       Convertidor de Videos
@@ -137,7 +141,7 @@
     <section class="contenedor_mp3" id="contenedor">
       <label for="link"
         >Ingresa una Url de Youtube para convertirlo en formato mp4 o
-        .mp3</label
+        mp3</label
       >
       <input name="link" id="link" type="text"  placeholder="URL"/>
       <button class="convert_button">
@@ -156,6 +160,11 @@
       </button>
     </section>
   </form>
+  <br><br>
+  <a href="/search" class="buscar"><p>Buscar video <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 6H6C4.89543 6 4 6.89543 4 8V18C4 19.1046 4.89543 20 6 20H16C17.1046 20 18 19.1046 18 18V14M14 4H20M20 4V10M20 4L10 14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+ </p></a> 
   {%endif%}
 
 {% endblock %}
